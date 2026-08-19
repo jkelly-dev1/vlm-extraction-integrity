@@ -1,0 +1,2 @@
+Which defenses actually catch a wrong field value in VLM document extraction
+-- measured across eight cumulative rungs and fourteen error classes.

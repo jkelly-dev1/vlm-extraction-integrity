@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vlm-extraction-integrity"
+version = "0.1.0"
+description = "Measuring which defenses actually catch a wrong field value in VLM document extraction"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+dependencies = []
+
+[project.optional-dependencies]
+# The offline half, corpus, error taxonomy, ladder, grader, is pure
+# standard library on purpose, so the measurement can be reproduced and
+# audited without installing anything.
+render = ["pillow>=10"]
+real = ["anthropic>=0.40", "openai>=2.0"]
+dev = ["pillow>=10", "anthropic>=0.40", "openai>=2.0", "pytest>=8"]
+
+[tool.setuptools]
+packages = ["vei"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = ["error::DeprecationWarning"]

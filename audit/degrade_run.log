@@ -1,0 +1,132 @@
+model            claude-opus-5
+design           25 documents x 4 levels = 100 calls (paired)
+  clean       660 visual tokens  eff 150.0 DPI   untouched render (control arm)
+  light       660 visual tokens  eff 150.0 DPI   good office scanner
+  moderate    352 visual tokens  eff 108.0 DPI   phone photo of a printed page
+  heavy       184 visual tokens  eff  78.0 DPI   fax or third-generation photocopy
+estimated tokens 88,400 in / 90,000 out
+ESTIMATED COST   $2.69  (list prices verified 2026-08-10)
+  clean     PO00000  exact
+  clean     PO00001  exact
+  clean     PO00002  exact
+  clean     PO00003  exact
+  clean     PO00004  exact
+  clean     PO00005  exact
+  clean     PO00006  exact
+  clean     PO00007  exact
+  clean     PO00008  exact
+  clean     PO00009  exact
+  clean     PO00010  exact
+  clean     PO00011  exact
+  clean     PO00012  exact
+  clean     PO00013  exact
+  clean     PO00014  exact
+  clean     PO00015  exact
+  clean     PO00016  exact
+  clean     PO00017  exact
+  clean     PO00018  exact
+  clean     PO00019  exact
+  clean     PO00020  exact
+  clean     PO00021  exact
+  clean     PO00022  exact
+  clean     PO00023  exact
+  clean     PO00024  exact
+  light     PO00000  exact
+  light     PO00001  exact
+  light     PO00002  exact
+  light     PO00003  exact
+  light     PO00004  exact
+  light     PO00005  exact
+  light     PO00006  exact
+  light     PO00007  exact
+  light     PO00008  exact
+  light     PO00009  exact
+  light     PO00010  exact
+  light     PO00011  exact
+  light     PO00012  exact
+  light     PO00013  exact
+  light     PO00014  exact
+  light     PO00015  exact
+  light     PO00016  exact
+  light     PO00017  exact
+  light     PO00018  exact
+  light     PO00019  exact
+  light     PO00020  exact
+  light     PO00021  exact
+  light     PO00022  exact
+  light     PO00023  exact
+  light     PO00024  exact
+  moderate  PO00000  exact
+  moderate  PO00001  value_consistent: line_items[2].sku,line_items[3].sku
+  moderate  PO00002  value_consistent: line_items[0].sku
+  moderate  PO00003  value_consistent: line_items[1].sku
+  moderate  PO00004  exact
+  moderate  PO00005  value_consistent: line_items[1].sku
+  moderate  PO00006  value_consistent: line_items[1].sku
+  moderate  PO00007  value_consistent: line_items[1].sku
+  moderate  PO00008  value_consistent: line_items[2].sku
+  moderate  PO00009  value_consistent: line_items[0].sku
+  moderate  PO00010  value_consistent: line_items[4].sku
+  moderate  PO00011  value_consistent: line_items[1].sku,line_items[2].sku
+  moderate  PO00012  value_consistent: po_number
+  moderate  PO00013  value_consistent: po_number,line_items[1].sku
+  moderate  PO00014  exact
+  moderate  PO00015  value_consistent: line_items[1].sku
+  moderate  PO00016  value_consistent: line_items[1].sku
+  moderate  PO00017  exact
+  moderate  PO00018  value_consistent: line_items[1].sku
+  moderate  PO00019  value_inconsistent: line_items[0].sku,line_items[0].unit_price_cents,line_items[0].amount_cents
+  moderate  PO00020  value_consistent: line_items[0].description
+  moderate  PO00021  exact
+  moderate  PO00022  value_consistent: line_items[3].sku
+  moderate  PO00023  exact
+  moderate  PO00024  value_consistent: line_items[3].sku
+  heavy     PO00000  value_inconsistent: po_number,order_date,due_date
+  heavy     PO00001  value_inconsistent: po_number,order_date,due_date
+  heavy     PO00002  value_inconsistent: po_number,order_date,due_date
+  heavy     PO00003  value_inconsistent: po_number,order_date,due_date
+  heavy     PO00004  value_inconsistent: po_number,order_date,due_date
+  heavy     PO00005  value_inconsistent: po_number,order_date,due_date
+  heavy     PO00006  value_inconsistent: po_number,order_date,due_date
+  heavy     PO00007  value_inconsistent: po_number,order_date,due_date
+  heavy     PO00008  value_inconsistent: po_number,order_date,due_date
+  heavy     PO00009  value_inconsistent: po_number,order_date,due_date
+  heavy     PO00010  value_inconsistent: po_number,order_date,due_date
+  heavy     PO00011  value_inconsistent: po_number,order_date,due_date
+  heavy     PO00012  value_inconsistent: po_number,order_date,due_date
+  heavy     PO00013  value_inconsistent: po_number,due_date,terms
+  heavy     PO00014  value_inconsistent: po_number,order_date,due_date
+  heavy     PO00015  value_inconsistent: po_number,order_date,due_date
+  heavy     PO00016  value_inconsistent: po_number,order_date,due_date
+  heavy     PO00017  value_inconsistent: po_number,order_date,due_date
+  heavy     PO00018  value_inconsistent: order_date,due_date,line_items[0].sku
+  heavy     PO00019  value_inconsistent: po_number,order_date,due_date
+  heavy     PO00020  value_inconsistent: po_number,order_date,due_date
+  heavy     PO00021  value_inconsistent: po_number,order_date,due_date
+  heavy     PO00022  value_inconsistent: po_number,order_date,due_date
+  heavy     PO00023  value_inconsistent: po_number,order_date,due_date
+  heavy     PO00024  value_inconsistent: po_number,order_date,due_date
+
+1250s   ACTUAL COST $2.44 (75,972 in / 82,562 out) vs $2.69 estimated
+
+ERROR RATE BY LEVEL (95% Wilson)
+  level      eff DPI     exact             error rate
+  clean        150.0    25/25         0% [  0- 13]
+  light        150.0    25/25         0% [  0- 13]
+  moderate     108.0     6/25        76% [ 57- 89]
+  heavy         78.0     0/25       100% [ 87-100]
+
+WHICH FAMILY DID THE ERRORS FALL INTO
+  level               structural  value_inconsistent    value_consistent
+  clean                        0                   0                   0
+  light                        0                   0                   0
+  moderate                     0                   1                  18
+  heavy                        0                  25                   0
+
+WHAT THE LADDER CAUGHT (of the errors at each level)
+  clean     0:0/0(fr0) 1:0/0(fr0) 2:0/0(fr0) 3:0/0(fr0) 4:0/0(fr0) 5:0/0(fr0) 6:0/0(fr0)
+  light     0:0/0(fr0) 1:0/0(fr0) 2:0/0(fr0) 3:0/0(fr0) 4:0/0(fr0) 5:0/0(fr2) 6:0/0(fr2)
+  moderate  0:0/19(fr0) 1:0/19(fr0) 2:0/19(fr0) 3:0/19(fr0) 4:1/19(fr0) 5:2/19(fr1) 6:2/19(fr1)
+  heavy     0:0/25(fr0) 1:0/25(fr0) 2:0/25(fr0) 3:0/25(fr0) 4:25/25(fr0) 5:25/25(fr0) 6:25/25(fr0)
+
+wrote audit/degrade_run.json

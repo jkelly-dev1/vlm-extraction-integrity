@@ -1,0 +1,107 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# Cancel an in-flight run when the same branch is pushed again.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # The offline job installs nothing but pytest. The corpus, the error
+  # taxonomy, the ladder and the grader are pure standard library on purpose,
+  # so the measurement can be reproduced without installing anything. If that
+  # ever stops being true this job goes red, which is the signal that "the
+  # offline half needs no dependencies" has become false. The rendering tests
+  # skip here; -rs prints which ones and why, so a green run shows what was
+  # skipped rather than looking like full coverage.
+  offline:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12", "3.13"]
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install pytest only
+        run: |
+          python -m pip install --upgrade pip
+          pip install "pytest>=8,<10"
+
+      - name: Tests (rendering tests skip)
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: pytest -q -rs
+
+      # --no-render is passed rather than left to chance. The demo degrades on
+      # its own when Pillow is absent, but whether it degrades would otherwise
+      # depend on which fonts a runner image happens to ship, and a job that
+      # measures a different thing on a different image is not a check.
+      # The rendering job below runs the same demo WITH regions.
+      - name: Offline demo (no rendered regions)
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: python scripts/offline_demo.py --no-render
+
+  # Separate job because it needs Pillow and a font. Everything that draws a
+  # page lives here: the renderer, the degradation levels, the injection
+  # channels, and the region-overlap check that caught the defect described in
+  # README section "The page was drawing one field on top of another".
+  # Pillow is pinned to what the recorded runs in audit/ were produced with.
+  rendering:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install with Pillow
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt "pytest>=8,<10"
+
+      - name: Full test suite
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: pytest -q -rs
+
+      # The other half of the pair above: rungs 5 and 6 checking citations
+      # against real recorded regions, which is the path every published
+      # offline number comes from. The offline job runs the degraded one.
+      - name: Offline demo (with rendered regions)
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: python scripts/offline_demo.py
+
+      # Re-scores every stored citation against the shipped rung and the two
+      # alternatives. Free, no API key, and it fails if an artifact in audit/
+      # stops parsing, which is how a published number goes quietly missing.
+      - name: Tolerance sweep over the stored artifacts
+        env:
+          PYTHONPATH: ${{ github.workspace }}
+        run: python scripts/tolerance_sweep.py
+
+      # A README is prose and drifts; audit/*.json is evidence and does not.
+      # This rebuilds each published figure from the JSON and requires the
+      # exact string, so a re-run that shifts a number fails loudly rather
+      # than leaving the document quietly wrong.
+      - name: README numbers match the shipped results
+        run: python scripts/check_readme_numbers.py

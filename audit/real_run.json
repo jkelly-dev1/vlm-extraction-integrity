@@ -1,0 +1,2530 @@
+{
+  "adapter": "claude",
+  "model": "claude-opus-5",
+  "effort": "medium",
+  "dpi": 150,
+  "n": 38,
+  "elapsed_s": 346.7,
+  "pricing_verified": "2026-08-10",
+  "estimated_cost_usd": 1.0602,
+  "actual_cost_usd": 0.8349,
+  "tokens": {
+    "input": 35834,
+    "output": 26230
+  },
+  "exact": 38,
+  "succeeded": 38,
+  "note": "Observed error rates for a real model. The offline demo's catch rates measure the ladder against constructed errors; these two must not be combined into a single figure.",
+  "results": {
+    "by_class": {},
+    "clean": {
+      "0_bare": {
+        "seen": 38,
+        "false_rejections": 0,
+        "false_rejection_rate": 0.0
+      },
+      "1_json_mode": {
+        "seen": 38,
+        "false_rejections": 0,
+        "false_rejection_rate": 0.0
+      },
+      "2_typed": {
+        "seen": 38,
+        "false_rejections": 0,
+        "false_rejection_rate": 0.0
+      },
+      "3_strict_schema": {
+        "seen": 38,
+        "false_rejections": 0,
+        "false_rejection_rate": 0.0
+      },
+      "4_cross_field": {
+        "seen": 38,
+        "false_rejections": 0,
+        "false_rejection_rate": 0.0
+      },
+      "5_grounded": {
+        "seen": 38,
+        "false_rejections": 0,
+        "false_rejection_rate": 0.0
+      },
+      "6_reread": {
+        "seen": 38,
+        "false_rejections": 0,
+        "false_rejection_rate": 0.0
+      }
+    }
+  },
+  "records": [
+    {
+      "doc_id": "PO00000",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 965,
+        "output_tokens": 872,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-80586\", \"order_date\": \"2026-05-10\", \"due_date\": \"2026-07-10\", \"vendor\": \"Kingsford Metals\", \"terms\": \"2/10 Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"PB-0404\", \"description\": \"Post base, 4x4 adjustable\", \"quantity\": 40, \"unit_price_cents\": 6005, \"amount_cents\": 240200}, {\"row\": 2, \"sku\": \"SS-1403\", \"description\": \"Structural screw #14 x 3in\", \"quantity\": 5, \"unit_price_cents\": 2030, \"amount_cents\": 10150}, {\"row\": 3, \"sku\": \"LN-10NY\", \"description\": \"Nylon lock nut M10\", \"quantity\": 15, \"unit_price_cents\": 677, \"amount_cents\": 10155}, {\"row\": 4, \"sku\": \"HB-1040Z\", \"description\": \"Hex bolt M10x40, zinc\", \"quantity\": 17, \"unit_price_cents\": 4300, \"amount_cents\": 73100}, {\"row\": 5, \"sku\": \"AB-0506\", \"description\": \"Anchor bolt 1/2in x 6in\", \"quantity\": 28, \"unit_price_cents\": 1733, \"amount_cents\": 48524}, {\"row\": 6, \"sku\": \"CS-0375\", \"description\": \"Concrete sleeve anchor 3/8\", \"quantity\": 28, \"unit_price_cents\": 6166, \"amount_cents\": 172648}], \"subtotal_cents\": 554777, \"tax_cents\": 45769, \"total_cents\": 600546}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            69,
+            120,
+            122,
+            132
+          ],
+          "subtotal_cents": [
+            632,
+            352,
+            679,
+            363
+          ],
+          "total_cents": [
+            632,
+            380,
+            683,
+            392
+          ]
+        },
+        "row_count": 6
+      }
+    },
+    {
+      "doc_id": "PO00001",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 965,
+        "output_tokens": 880,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-52057\", \"order_date\": \"2026-02-26\", \"due_date\": \"2026-05-26\", \"vendor\": \"Northgate Trading\", \"terms\": \"2/10 Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"SD-1200\", \"description\": \"Self-drilling screw #12\", \"quantity\": 9, \"unit_price_cents\": 9365, \"amount_cents\": 84285}, {\"row\": 2, \"sku\": \"PB-0404\", \"description\": \"Post base, 4x4 adjustable\", \"quantity\": 19, \"unit_price_cents\": 2353, \"amount_cents\": 44707}, {\"row\": 3, \"sku\": \"FW-10SS\", \"description\": \"Flat washer M10, stainless\", \"quantity\": 37, \"unit_price_cents\": 1208, \"amount_cents\": 44696}, {\"row\": 4, \"sku\": \"TR-0372\", \"description\": \"Threaded rod 3/8in, 6ft\", \"quantity\": 7, \"unit_price_cents\": 6286, \"amount_cents\": 44002}, {\"row\": 5, \"sku\": \"CS-0375\", \"description\": \"Concrete sleeve anchor 3/8\", \"quantity\": 2, \"unit_price_cents\": 6450, \"amount_cents\": 12900}, {\"row\": 6, \"sku\": \"AB-0506\", \"description\": \"Anchor bolt 1/2in x 6in\", \"quantity\": 9, \"unit_price_cents\": 8263, \"amount_cents\": 74367}], \"subtotal_cents\": 304957, \"tax_cents\": 25159, \"total_cents\": 330116}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            71,
+            120,
+            131,
+            132
+          ],
+          "subtotal_cents": [
+            630,
+            351,
+            681,
+            363
+          ],
+          "total_cents": [
+            630,
+            379,
+            681,
+            392
+          ]
+        },
+        "row_count": 6
+      }
+    },
+    {
+      "doc_id": "PO00002",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 921,
+        "output_tokens": 597,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-15255\", \"order_date\": \"2026-03-15\", \"due_date\": \"2026-04-15\", \"vendor\": \"Lakeside Fabrication\", \"terms\": \"2/10 Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"HB-1040Z\", \"description\": \"Hex bolt M10x40, zinc\", \"quantity\": 34, \"unit_price_cents\": 4997, \"amount_cents\": 169898}, {\"row\": 2, \"sku\": \"SS-1403\", \"description\": \"Structural screw #14 x 3in\", \"quantity\": 22, \"unit_price_cents\": 5269, \"amount_cents\": 115918}, {\"row\": 3, \"sku\": \"AB-0506\", \"description\": \"Anchor bolt 1/2in x 6in\", \"quantity\": 10, \"unit_price_cents\": 11592, \"amount_cents\": 115920}], \"subtotal_cents\": 401736, \"tax_cents\": 33143, \"total_cents\": 434879}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            71,
+            118,
+            116,
+            132
+          ],
+          "subtotal_cents": [
+            633,
+            310,
+            673,
+            322
+          ],
+          "total_cents": [
+            633,
+            338,
+            681,
+            351
+          ]
+        },
+        "row_count": 3
+      }
+    },
+    {
+      "doc_id": "PO00003",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 921,
+        "output_tokens": 625,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-14313\", \"order_date\": \"2026-12-04\", \"due_date\": \"2027-02-04\", \"vendor\": \"Cascade Industrial\", \"terms\": \"Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"CS-0375\", \"description\": \"Concrete sleeve anchor 3/8\", \"quantity\": 28, \"unit_price_cents\": 2495, \"amount_cents\": 69860}, {\"row\": 2, \"sku\": \"LN-10NY\", \"description\": \"Nylon lock nut M10\", \"quantity\": 17, \"unit_price_cents\": 7649, \"amount_cents\": 130033}, {\"row\": 3, \"sku\": \"SS-1403\", \"description\": \"Structural screw #14 x 3in\", \"quantity\": 35, \"unit_price_cents\": 3715, \"amount_cents\": 130025}], \"subtotal_cents\": 329918, \"tax_cents\": 27218, \"total_cents\": 357136}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            70,
+            119,
+            122,
+            133
+          ],
+          "subtotal_cents": [
+            631,
+            310,
+            682,
+            322
+          ],
+          "total_cents": [
+            628,
+            338,
+            682,
+            351
+          ]
+        },
+        "row_count": 3
+      }
+    },
+    {
+      "doc_id": "PO00004",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 921,
+        "output_tokens": 559,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-17733\", \"order_date\": \"2025-11-21\", \"due_date\": \"2025-12-21\", \"vendor\": \"Ashcroft Components\", \"terms\": \"Net 60\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"LN-10NY\", \"description\": \"Nylon lock nut M10\", \"quantity\": 8, \"unit_price_cents\": 8027, \"amount_cents\": 64216}, {\"row\": 2, \"sku\": \"HB-1040Z\", \"description\": \"Hex bolt M10x40, zinc\", \"quantity\": 11, \"unit_price_cents\": 6863, \"amount_cents\": 75493}, {\"row\": 3, \"sku\": \"SD-1200\", \"description\": \"Self-drilling screw #12\", \"quantity\": 40, \"unit_price_cents\": 1887, \"amount_cents\": 75480}, {\"row\": 4, \"sku\": \"AB-0506\", \"description\": \"Anchor bolt 1/2in x 6in\", \"quantity\": 34, \"unit_price_cents\": 4894, \"amount_cents\": 166396}], \"subtotal_cents\": 381585, \"tax_cents\": 31481, \"total_cents\": 413066}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            68,
+            121,
+            118,
+            133
+          ],
+          "subtotal_cents": [
+            632,
+            322,
+            682,
+            334
+          ],
+          "total_cents": [
+            632,
+            351,
+            690,
+            364
+          ]
+        },
+        "row_count": 4
+      }
+    },
+    {
+      "doc_id": "PO00005",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 921,
+        "output_tokens": 617,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-33948\", \"order_date\": \"2026-07-13\", \"due_date\": \"2026-10-13\", \"vendor\": \"Brightwater Tooling\", \"terms\": \"Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"CS-0375\", \"description\": \"Concrete sleeve anchor 3/8\", \"quantity\": 36, \"unit_price_cents\": 6325, \"amount_cents\": 227700}, {\"row\": 2, \"sku\": \"TR-0372\", \"description\": \"Threaded rod 3/8in, 6ft\", \"quantity\": 13, \"unit_price_cents\": 7495, \"amount_cents\": 97435}, {\"row\": 3, \"sku\": \"SD-1200\", \"description\": \"Self-drilling screw #12\", \"quantity\": 22, \"unit_price_cents\": 4429, \"amount_cents\": 97438}], \"subtotal_cents\": 422573, \"tax_cents\": 34862, \"total_cents\": 457435}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            68,
+            121,
+            119,
+            133
+          ],
+          "subtotal_cents": [
+            634,
+            312,
+            683,
+            323
+          ],
+          "total_cents": [
+            634,
+            341,
+            683,
+            353
+          ]
+        },
+        "row_count": 3
+      }
+    },
+    {
+      "doc_id": "PO00006",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 921,
+        "output_tokens": 472,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-58178\", \"order_date\": \"2025-01-07\", \"due_date\": \"2025-04-07\", \"vendor\": \"Fairmont Materials\", \"terms\": \"Net 60\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"LN-10NY\", \"description\": \"Nylon lock nut M10\", \"quantity\": 24, \"unit_price_cents\": 7382, \"amount_cents\": 177168}, {\"row\": 2, \"sku\": \"FW-10SS\", \"description\": \"Flat washer M10, stainless\", \"quantity\": 22, \"unit_price_cents\": 1353, \"amount_cents\": 29766}, {\"row\": 3, \"sku\": \"CS-0375\", \"description\": \"Concrete sleeve anchor 3/8\", \"quantity\": 36, \"unit_price_cents\": 827, \"amount_cents\": 29772}], \"subtotal_cents\": 236706, \"tax_cents\": 19528, \"total_cents\": 256234}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            68,
+            120,
+            121,
+            132
+          ],
+          "subtotal_cents": [
+            634,
+            310,
+            683,
+            321
+          ],
+          "total_cents": [
+            627,
+            339,
+            679,
+            351
+          ]
+        },
+        "row_count": 3
+      }
+    },
+    {
+      "doc_id": "PO00007",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 921,
+        "output_tokens": 800,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-96824\", \"order_date\": \"2026-01-14\", \"due_date\": \"2026-02-14\", \"vendor\": \"Northgate Trading\", \"terms\": \"2/10 Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"HB-1040Z\", \"description\": \"Hex bolt M10x40, zinc\", \"quantity\": 5, \"unit_price_cents\": 4765, \"amount_cents\": 23825}, {\"row\": 2, \"sku\": \"FW-10SS\", \"description\": \"Flat washer M10, stainless\", \"quantity\": 26, \"unit_price_cents\": 2923, \"amount_cents\": 75998}, {\"row\": 3, \"sku\": \"SS-1403\", \"description\": \"Structural screw #14 x 3in\", \"quantity\": 34, \"unit_price_cents\": 2235, \"amount_cents\": 75990}, {\"row\": 4, \"sku\": \"AB-0506\", \"description\": \"Anchor bolt 1/2in x 6in\", \"quantity\": 36, \"unit_price_cents\": 5688, \"amount_cents\": 204768}], \"subtotal_cents\": 380581, \"tax_cents\": 31398, \"total_cents\": 411979}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            69,
+            121,
+            116,
+            134
+          ],
+          "subtotal_cents": [
+            630,
+            324,
+            683,
+            337
+          ],
+          "total_cents": [
+            630,
+            351,
+            693,
+            366
+          ]
+        },
+        "row_count": 4
+      }
+    },
+    {
+      "doc_id": "PO00008",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 965,
+        "output_tokens": 633,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-69164\", \"order_date\": \"2026-06-14\", \"due_date\": \"2026-09-14\", \"vendor\": \"Lakeside Fabrication\", \"terms\": \"2/10 Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"SD-1200\", \"description\": \"Self-drilling screw #12\", \"quantity\": 33, \"unit_price_cents\": 7832, \"amount_cents\": 258456}, {\"row\": 2, \"sku\": \"AB-0506\", \"description\": \"Anchor bolt 1/2in x 6in\", \"quantity\": 18, \"unit_price_cents\": 5597, \"amount_cents\": 100746}, {\"row\": 3, \"sku\": \"FW-10SS\", \"description\": \"Flat washer M10, stainless\", \"quantity\": 3, \"unit_price_cents\": 33582, \"amount_cents\": 100746}, {\"row\": 4, \"sku\": \"LN-10NY\", \"description\": \"Nylon lock nut M10\", \"quantity\": 12, \"unit_price_cents\": 1612, \"amount_cents\": 19344}, {\"row\": 5, \"sku\": \"JH-0208\", \"description\": \"Joist hanger, 2x8\", \"quantity\": 37, \"unit_price_cents\": 3463, \"amount_cents\": 128131}], \"subtotal_cents\": 607423, \"tax_cents\": 50112, \"total_cents\": 657535}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            71,
+            120,
+            131,
+            133
+          ],
+          "subtotal_cents": [
+            634,
+            338,
+            680,
+            349
+          ],
+          "total_cents": [
+            622,
+            365,
+            682,
+            378
+          ]
+        },
+        "row_count": 5
+      }
+    },
+    {
+      "doc_id": "PO00009",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 965,
+        "output_tokens": 871,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-97790\", \"order_date\": \"2026-10-07\", \"due_date\": \"2026-12-07\", \"vendor\": \"Fairmont Materials\", \"terms\": \"2/10 Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"TR-0372\", \"description\": \"Threaded rod 3/8in, 6ft\", \"quantity\": 22, \"unit_price_cents\": 2647, \"amount_cents\": 58234}, {\"row\": 2, \"sku\": \"CS-0375\", \"description\": \"Concrete sleeve anchor 3/8\", \"quantity\": 17, \"unit_price_cents\": 149, \"amount_cents\": 2533}, {\"row\": 3, \"sku\": \"PB-0404\", \"description\": \"Post base, 4x4 adjustable\", \"quantity\": 7, \"unit_price_cents\": 362, \"amount_cents\": 2534}, {\"row\": 4, \"sku\": \"AB-0506\", \"description\": \"Anchor bolt 1/2in x 6in\", \"quantity\": 15, \"unit_price_cents\": 6820, \"amount_cents\": 102300}, {\"row\": 5, \"sku\": \"SS-1403\", \"description\": \"Structural screw #14 x 3in\", \"quantity\": 20, \"unit_price_cents\": 1568, \"amount_cents\": 31360}], \"subtotal_cents\": 196961, \"tax_cents\": 16249, \"total_cents\": 213210}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            69,
+            120,
+            132,
+            133
+          ],
+          "subtotal_cents": [
+            632,
+            338,
+            683,
+            350
+          ],
+          "total_cents": [
+            629,
+            366,
+            686,
+            379
+          ]
+        },
+        "row_count": 5
+      }
+    },
+    {
+      "doc_id": "PO00010",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 965,
+        "output_tokens": 643,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-68280\", \"order_date\": \"2026-05-27\", \"due_date\": \"2026-08-27\", \"vendor\": \"Fairmont Materials\", \"terms\": \"Net 45\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"JH-0208\", \"description\": \"Joist hanger, 2x8\", \"quantity\": 34, \"unit_price_cents\": 6072, \"amount_cents\": 206448}, {\"row\": 2, \"sku\": \"AB-0506\", \"description\": \"Anchor bolt 1/2in x 6in\", \"quantity\": 33, \"unit_price_cents\": 7722, \"amount_cents\": 254826}, {\"row\": 3, \"sku\": \"PB-0404\", \"description\": \"Post base, 4x4 adjustable\", \"quantity\": 9, \"unit_price_cents\": 28314, \"amount_cents\": 254826}, {\"row\": 4, \"sku\": \"CS-0375\", \"description\": \"Concrete sleeve anchor 3/8\", \"quantity\": 37, \"unit_price_cents\": 677, \"amount_cents\": 25049}, {\"row\": 5, \"sku\": \"FW-10SS\", \"description\": \"Flat washer M10, stainless\", \"quantity\": 21, \"unit_price_cents\": 6725, \"amount_cents\": 141225}], \"subtotal_cents\": 882374, \"tax_cents\": 72796, \"total_cents\": 955170}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            69,
+            121,
+            118,
+            132
+          ],
+          "subtotal_cents": [
+            628,
+            339,
+            679,
+            350
+          ],
+          "total_cents": [
+            628,
+            367,
+            679,
+            379
+          ]
+        },
+        "row_count": 5
+      }
+    },
+    {
+      "doc_id": "PO00011",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 965,
+        "output_tokens": 756,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-86619\", \"order_date\": \"2025-11-24\", \"due_date\": \"2025-12-24\", \"vendor\": \"Northgate Trading\", \"terms\": \"Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"SD-1200\", \"description\": \"Self-drilling screw #12\", \"quantity\": 38, \"unit_price_cents\": 916, \"amount_cents\": 34808}, {\"row\": 2, \"sku\": \"TR-0372\", \"description\": \"Threaded rod 3/8in, 6ft\", \"quantity\": 16, \"unit_price_cents\": 4802, \"amount_cents\": 76832}, {\"row\": 3, \"sku\": \"SS-1403\", \"description\": \"Structural screw #14 x 3in\", \"quantity\": 3, \"unit_price_cents\": 25611, \"amount_cents\": 76833}, {\"row\": 4, \"sku\": \"PB-0404\", \"description\": \"Post base, 4x4 adjustable\", \"quantity\": 35, \"unit_price_cents\": 1881, \"amount_cents\": 65835}, {\"row\": 5, \"sku\": \"JH-0208\", \"description\": \"Joist hanger, 2x8\", \"quantity\": 24, \"unit_price_cents\": 413, \"amount_cents\": 9912}, {\"row\": 6, \"sku\": \"LN-10NY\", \"description\": \"Nylon lock nut M10\", \"quantity\": 6, \"unit_price_cents\": 1563, \"amount_cents\": 9378}], \"subtotal_cents\": 273598, \"tax_cents\": 22572, \"total_cents\": 296170}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            68,
+            120,
+            120,
+            132
+          ],
+          "subtotal_cents": [
+            630,
+            351,
+            683,
+            363
+          ],
+          "total_cents": [
+            630,
+            379,
+            685,
+            392
+          ]
+        },
+        "row_count": 6
+      }
+    },
+    {
+      "doc_id": "PO00012",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 921,
+        "output_tokens": 559,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-28304\", \"order_date\": \"2025-02-04\", \"due_date\": \"2025-04-04\", \"vendor\": \"Ridgeline Supply Co\", \"terms\": \"Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"CS-0375\", \"description\": \"Concrete sleeve anchor 3/8\", \"quantity\": 17, \"unit_price_cents\": 919, \"amount_cents\": 15623}, {\"row\": 2, \"sku\": \"SS-1403\", \"description\": \"Structural screw #14 x 3in\", \"quantity\": 33, \"unit_price_cents\": 8747, \"amount_cents\": 288651}, {\"row\": 3, \"sku\": \"PB-0404\", \"description\": \"Post base, 4x4 adjustable\", \"quantity\": 2, \"unit_price_cents\": 144326, \"amount_cents\": 288652}, {\"row\": 4, \"sku\": \"JH-0208\", \"description\": \"Joist hanger, 2x8\", \"quantity\": 25, \"unit_price_cents\": 1998, \"amount_cents\": 49950}], \"subtotal_cents\": 642876, \"tax_cents\": 53037, \"total_cents\": 695913}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            68,
+            120,
+            116,
+            132
+          ],
+          "subtotal_cents": [
+            634,
+            324,
+            682,
+            336
+          ],
+          "total_cents": [
+            634,
+            352,
+            690,
+            364
+          ]
+        },
+        "row_count": 4
+      }
+    },
+    {
+      "doc_id": "PO00013",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 965,
+        "output_tokens": 726,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-30375\", \"order_date\": \"2025-11-02\", \"due_date\": \"2025-12-02\", \"vendor\": \"Ridgeline Supply Co\", \"terms\": \"Net 45\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"AB-0506\", \"description\": \"Anchor bolt 1/2in x 6in\", \"quantity\": 10, \"unit_price_cents\": 326, \"amount_cents\": 3260}, {\"row\": 2, \"sku\": \"FW-10SS\", \"description\": \"Flat washer M10, stainless\", \"quantity\": 13, \"unit_price_cents\": 6165, \"amount_cents\": 80145}, {\"row\": 3, \"sku\": \"JH-0208\", \"description\": \"Joist hanger, 2x8\", \"quantity\": 14, \"unit_price_cents\": 5725, \"amount_cents\": 80150}, {\"row\": 4, \"sku\": \"CS-0375\", \"description\": \"Concrete sleeve anchor 3/8\", \"quantity\": 21, \"unit_price_cents\": 292, \"amount_cents\": 6132}, {\"row\": 5, \"sku\": \"PB-0404\", \"description\": \"Post base, 4x4 adjustable\", \"quantity\": 5, \"unit_price_cents\": 2355, \"amount_cents\": 11775}, {\"row\": 6, \"sku\": \"SD-1200\", \"description\": \"Self-drilling screw #12\", \"quantity\": 35, \"unit_price_cents\": 2079, \"amount_cents\": 72765}], \"subtotal_cents\": 254227, \"tax_cents\": 20974, \"total_cents\": 275201}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            69,
+            120,
+            116,
+            132
+          ],
+          "subtotal_cents": [
+            629,
+            351,
+            683,
+            363
+          ],
+          "total_cents": [
+            629,
+            380,
+            694,
+            392
+          ]
+        },
+        "row_count": 6
+      }
+    },
+    {
+      "doc_id": "PO00014",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 965,
+        "output_tokens": 743,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-67587\", \"order_date\": \"2026-02-15\", \"due_date\": \"2026-04-15\", \"vendor\": \"Cascade Industrial\", \"terms\": \"Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"JH-0208\", \"description\": \"Joist hanger, 2x8\", \"quantity\": 38, \"unit_price_cents\": 4057, \"amount_cents\": 154166}, {\"row\": 2, \"sku\": \"CS-0375\", \"description\": \"Concrete sleeve anchor 3/8\", \"quantity\": 37, \"unit_price_cents\": 6441, \"amount_cents\": 238317}, {\"row\": 3, \"sku\": \"HB-1040Z\", \"description\": \"Hex bolt M10x40, zinc\", \"quantity\": 10, \"unit_price_cents\": 23832, \"amount_cents\": 238320}, {\"row\": 4, \"sku\": \"AB-0506\", \"description\": \"Anchor bolt 1/2in x 6in\", \"quantity\": 10, \"unit_price_cents\": 6309, \"amount_cents\": 63090}, {\"row\": 5, \"sku\": \"TR-0372\", \"description\": \"Threaded rod 3/8in, 6ft\", \"quantity\": 28, \"unit_price_cents\": 8377, \"amount_cents\": 234556}], \"subtotal_cents\": 928449, \"tax_cents\": 76597, \"total_cents\": 1005046}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            69,
+            118,
+            121,
+            132
+          ],
+          "subtotal_cents": [
+            633,
+            338,
+            684,
+            351
+          ],
+          "total_cents": [
+            633,
+            365,
+            692,
+            379
+          ]
+        },
+        "row_count": 5
+      }
+    },
+    {
+      "doc_id": "PO00015",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 921,
+        "output_tokens": 586,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-65259\", \"order_date\": \"2026-03-16\", \"due_date\": \"2026-04-16\", \"vendor\": \"Ashcroft Components\", \"terms\": \"2/10 Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"HB-1040Z\", \"description\": \"Hex bolt M10x40, zinc\", \"quantity\": 25, \"unit_price_cents\": 5394, \"amount_cents\": 134850}, {\"row\": 2, \"sku\": \"SS-1403\", \"description\": \"Structural screw #14 x 3in\", \"quantity\": 28, \"unit_price_cents\": 8397, \"amount_cents\": 235116}, {\"row\": 3, \"sku\": \"CS-0375\", \"description\": \"Concrete sleeve anchor 3/8\", \"quantity\": 39, \"unit_price_cents\": 6029, \"amount_cents\": 235131}], \"subtotal_cents\": 605097, \"tax_cents\": 49921, \"total_cents\": 655018}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            70,
+            119,
+            122,
+            132
+          ],
+          "subtotal_cents": [
+            634,
+            310,
+            677,
+            322
+          ],
+          "total_cents": [
+            627,
+            338,
+            682,
+            352
+          ]
+        },
+        "row_count": 3
+      }
+    },
+    {
+      "doc_id": "PO00016",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 965,
+        "output_tokens": 640,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-70654\", \"order_date\": \"2025-07-23\", \"due_date\": \"2025-08-23\", \"vendor\": \"Kingsford Metals\", \"terms\": \"2/10 Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"AB-0506\", \"description\": \"Anchor bolt 1/2in x 6in\", \"quantity\": 8, \"unit_price_cents\": 5296, \"amount_cents\": 42368}, {\"row\": 2, \"sku\": \"LN-10NY\", \"description\": \"Nylon lock nut M10\", \"quantity\": 23, \"unit_price_cents\": 3052, \"amount_cents\": 70196}, {\"row\": 3, \"sku\": \"JH-0208\", \"description\": \"Joist hanger, 2x8\", \"quantity\": 29, \"unit_price_cents\": 2421, \"amount_cents\": 70209}, {\"row\": 4, \"sku\": \"SS-1403\", \"description\": \"Structural screw #14 x 3in\", \"quantity\": 40, \"unit_price_cents\": 1119, \"amount_cents\": 44760}, {\"row\": 5, \"sku\": \"SD-1200\", \"description\": \"Self-drilling screw #12\", \"quantity\": 36, \"unit_price_cents\": 724, \"amount_cents\": 26064}], \"subtotal_cents\": 253597, \"tax_cents\": 20922, \"total_cents\": 274519}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            69,
+            121,
+            122,
+            133
+          ],
+          "subtotal_cents": [
+            634,
+            339,
+            685,
+            350
+          ],
+          "total_cents": [
+            628,
+            366,
+            687,
+            379
+          ]
+        },
+        "row_count": 5
+      }
+    },
+    {
+      "doc_id": "PO00017",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 965,
+        "output_tokens": 923,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-62941\", \"order_date\": \"2026-02-21\", \"due_date\": \"2026-03-21\", \"vendor\": \"Cascade Industrial\", \"terms\": \"Due on receipt\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"SD-1200\", \"description\": \"Self-drilling screw #12\", \"quantity\": 29, \"unit_price_cents\": 4896, \"amount_cents\": 141984}, {\"row\": 2, \"sku\": \"PB-0404\", \"description\": \"Post base, 4x4 adjustable\", \"quantity\": 26, \"unit_price_cents\": 7280, \"amount_cents\": 189280}, {\"row\": 3, \"sku\": \"AB-0506\", \"description\": \"Anchor bolt 1/2in x 6in\", \"quantity\": 15, \"unit_price_cents\": 12619, \"amount_cents\": 189285}, {\"row\": 4, \"sku\": \"TR-0372\", \"description\": \"Threaded rod 3/8in, 6ft\", \"quantity\": 22, \"unit_price_cents\": 9454, \"amount_cents\": 207988}, {\"row\": 5, \"sku\": \"CS-0375\", \"description\": \"Concrete sleeve anchor 3/8\", \"quantity\": 2, \"unit_price_cents\": 9096, \"amount_cents\": 18192}, {\"row\": 6, \"sku\": \"HB-1040Z\", \"description\": \"Hex bolt M10x40, zinc\", \"quantity\": 15, \"unit_price_cents\": 4923, \"amount_cents\": 73845}], \"subtotal_cents\": 820574, \"tax_cents\": 67697, \"total_cents\": 888271}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            68,
+            120,
+            118,
+            132
+          ],
+          "subtotal_cents": [
+            634,
+            351,
+            686,
+            363
+          ],
+          "total_cents": [
+            634,
+            379,
+            690,
+            392
+          ]
+        },
+        "row_count": 6
+      }
+    },
+    {
+      "doc_id": "PO00018",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 921,
+        "output_tokens": 555,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-27776\", \"order_date\": \"2026-11-23\", \"due_date\": \"2026-12-23\", \"vendor\": \"Cascade Industrial\", \"terms\": \"2/10 Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"SD-1200\", \"description\": \"Self-drilling screw #12\", \"quantity\": 26, \"unit_price_cents\": 3411, \"amount_cents\": 88686}, {\"row\": 2, \"sku\": \"FW-10SS\", \"description\": \"Flat washer M10, stainless\", \"quantity\": 24, \"unit_price_cents\": 839, \"amount_cents\": 20136}, {\"row\": 3, \"sku\": \"TR-0372\", \"description\": \"Threaded rod 3/8in, 6ft\", \"quantity\": 28, \"unit_price_cents\": 719, \"amount_cents\": 20132}], \"subtotal_cents\": 128954, \"tax_cents\": 10639, \"total_cents\": 139593}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            72,
+            120,
+            117,
+            132
+          ],
+          "subtotal_cents": [
+            631,
+            310,
+            669,
+            321
+          ],
+          "total_cents": [
+            629,
+            339,
+            677,
+            351
+          ]
+        },
+        "row_count": 3
+      }
+    },
+    {
+      "doc_id": "PO00019",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 921,
+        "output_tokens": 747,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-73380\", \"order_date\": \"2026-07-11\", \"due_date\": \"2026-09-11\", \"vendor\": \"Ridgeline Supply Co\", \"terms\": \"Due on receipt\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"FW-10SS\", \"description\": \"Flat washer M10, stainless\", \"quantity\": 36, \"unit_price_cents\": 8047, \"amount_cents\": 289692}, {\"row\": 2, \"sku\": \"LN-10NY\", \"description\": \"Nylon lock nut M10\", \"quantity\": 11, \"unit_price_cents\": 8050, \"amount_cents\": 88550}, {\"row\": 3, \"sku\": \"PB-0404\", \"description\": \"Post base, 4x4 adjustable\", \"quantity\": 18, \"unit_price_cents\": 4919, \"amount_cents\": 88542}, {\"row\": 4, \"sku\": \"CS-0375\", \"description\": \"Concrete sleeve anchor 3/8\", \"quantity\": 37, \"unit_price_cents\": 7321, \"amount_cents\": 270877}], \"subtotal_cents\": 737661, \"tax_cents\": 60857, \"total_cents\": 798518}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            68,
+            120,
+            116,
+            132
+          ],
+          "subtotal_cents": [
+            630,
+            324,
+            682,
+            336
+          ],
+          "total_cents": [
+            630,
+            352,
+            686,
+            365
+          ]
+        },
+        "row_count": 4
+      }
+    },
+    {
+      "doc_id": "PO00020",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 921,
+        "output_tokens": 560,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-34399\", \"order_date\": \"2025-06-21\", \"due_date\": \"2025-09-21\", \"vendor\": \"Fairmont Materials\", \"terms\": \"Net 60\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"TR-0372\", \"description\": \"Threaded rod 3/8in, 6ft\", \"quantity\": 30, \"unit_price_cents\": 7984, \"amount_cents\": 239520}, {\"row\": 2, \"sku\": \"SD-1200\", \"description\": \"Self-drilling screw #12\", \"quantity\": 19, \"unit_price_cents\": 2307, \"amount_cents\": 43833}, {\"row\": 3, \"sku\": \"SS-1403\", \"description\": \"Structural screw #14 x 3in\", \"quantity\": 19, \"unit_price_cents\": 2307, \"amount_cents\": 43833}], \"subtotal_cents\": 327186, \"tax_cents\": 26993, \"total_cents\": 354179}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            68,
+            121,
+            116,
+            133
+          ],
+          "subtotal_cents": [
+            632,
+            311,
+            683,
+            322
+          ],
+          "total_cents": [
+            628,
+            339,
+            679,
+            352
+          ]
+        },
+        "row_count": 3
+      }
+    },
+    {
+      "doc_id": "PO00021",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 965,
+        "output_tokens": 901,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-17020\", \"order_date\": \"2025-06-26\", \"due_date\": \"2025-07-26\", \"vendor\": \"Cascade Industrial\", \"terms\": \"2/10 Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"CS-0375\", \"description\": \"Concrete sleeve anchor 3/8\", \"quantity\": 6, \"unit_price_cents\": 2526, \"amount_cents\": 15156}, {\"row\": 2, \"sku\": \"HB-1040Z\", \"description\": \"Hex bolt M10x40, zinc\", \"quantity\": 13, \"unit_price_cents\": 1190, \"amount_cents\": 15470}, {\"row\": 3, \"sku\": \"SD-1200\", \"description\": \"Self-drilling screw #12\", \"quantity\": 35, \"unit_price_cents\": 442, \"amount_cents\": 15470}, {\"row\": 4, \"sku\": \"AB-0506\", \"description\": \"Anchor bolt 1/2in x 6in\", \"quantity\": 29, \"unit_price_cents\": 6258, \"amount_cents\": 181482}, {\"row\": 5, \"sku\": \"JH-0208\", \"description\": \"Joist hanger, 2x8\", \"quantity\": 31, \"unit_price_cents\": 1348, \"amount_cents\": 41788}], \"subtotal_cents\": 269366, \"tax_cents\": 22223, \"total_cents\": 291589}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            69,
+            121,
+            117,
+            133
+          ],
+          "subtotal_cents": [
+            628,
+            339,
+            683,
+            351
+          ],
+          "total_cents": [
+            628,
+            366,
+            681,
+            380
+          ]
+        },
+        "row_count": 5
+      }
+    },
+    {
+      "doc_id": "PO00022",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 921,
+        "output_tokens": 560,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-74666\", \"order_date\": \"2026-09-11\", \"due_date\": \"2026-10-11\", \"vendor\": \"Ridgeline Supply Co\", \"terms\": \"2/10 Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"HB-1040Z\", \"description\": \"Hex bolt M10x40, zinc\", \"quantity\": 9, \"unit_price_cents\": 2826, \"amount_cents\": 25434}, {\"row\": 2, \"sku\": \"SD-1200\", \"description\": \"Self-drilling screw #12\", \"quantity\": 5, \"unit_price_cents\": 479, \"amount_cents\": 2395}, {\"row\": 3, \"sku\": \"JH-0208\", \"description\": \"Joist hanger, 2x8\", \"quantity\": 16, \"unit_price_cents\": 150, \"amount_cents\": 2400}, {\"row\": 4, \"sku\": \"FW-10SS\", \"description\": \"Flat washer M10, stainless\", \"quantity\": 28, \"unit_price_cents\": 2196, \"amount_cents\": 61488}], \"subtotal_cents\": 91717, \"tax_cents\": 7567, \"total_cents\": 99284}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            71,
+            120,
+            119,
+            132
+          ],
+          "subtotal_cents": [
+            634,
+            324,
+            668,
+            336
+          ],
+          "total_cents": [
+            634,
+            352,
+            673,
+            364
+          ]
+        },
+        "row_count": 4
+      }
+    },
+    {
+      "doc_id": "PO00023",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 921,
+        "output_tokens": 555,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-55579\", \"order_date\": \"2025-08-16\", \"due_date\": \"2025-11-16\", \"vendor\": \"Cascade Industrial\", \"terms\": \"Net 45\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"SD-1200\", \"description\": \"Self-drilling screw #12\", \"quantity\": 14, \"unit_price_cents\": 317, \"amount_cents\": 4438}, {\"row\": 2, \"sku\": \"LN-10NY\", \"description\": \"Nylon lock nut M10\", \"quantity\": 27, \"unit_price_cents\": 3864, \"amount_cents\": 104328}, {\"row\": 3, \"sku\": \"HB-1040Z\", \"description\": \"Hex bolt M10x40, zinc\", \"quantity\": 35, \"unit_price_cents\": 2981, \"amount_cents\": 104335}, {\"row\": 4, \"sku\": \"PB-0404\", \"description\": \"Post base, 4x4 adjustable\", \"quantity\": 37, \"unit_price_cents\": 4184, \"amount_cents\": 154808}], \"subtotal_cents\": 367909, \"tax_cents\": 30352, \"total_cents\": 398261}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            70,
+            121,
+            121,
+            132
+          ],
+          "subtotal_cents": [
+            631,
+            324,
+            682,
+            335
+          ],
+          "total_cents": [
+            631,
+            352,
+            692,
+            364
+          ]
+        },
+        "row_count": 4
+      }
+    },
+    {
+      "doc_id": "PO00024",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 965,
+        "output_tokens": 855,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-43260\", \"order_date\": \"2026-09-28\", \"due_date\": \"2026-11-28\", \"vendor\": \"Lakeside Fabrication\", \"terms\": \"2/10 Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"AB-0506\", \"description\": \"Anchor bolt 1/2in x 6in\", \"quantity\": 5, \"unit_price_cents\": 1100, \"amount_cents\": 5500}, {\"row\": 2, \"sku\": \"JH-0208\", \"description\": \"Joist hanger, 2x8\", \"quantity\": 11, \"unit_price_cents\": 1901, \"amount_cents\": 20911}, {\"row\": 3, \"sku\": \"PB-0404\", \"description\": \"Post base, 4x4 adjustable\", \"quantity\": 30, \"unit_price_cents\": 697, \"amount_cents\": 20910}, {\"row\": 4, \"sku\": \"FW-10SS\", \"description\": \"Flat washer M10, stainless\", \"quantity\": 23, \"unit_price_cents\": 3917, \"amount_cents\": 90091}, {\"row\": 5, \"sku\": \"CS-0375\", \"description\": \"Concrete sleeve anchor 3/8\", \"quantity\": 27, \"unit_price_cents\": 5982, \"amount_cents\": 161514}], \"subtotal_cents\": 298926, \"tax_cents\": 24661, \"total_cents\": 323587}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            71,
+            120,
+            122,
+            132
+          ],
+          "subtotal_cents": [
+            633,
+            339,
+            685,
+            350
+          ],
+          "total_cents": [
+            633,
+            366,
+            692,
+            379
+          ]
+        },
+        "row_count": 5
+      }
+    },
+    {
+      "doc_id": "PO00025",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 965,
+        "output_tokens": 727,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-36665\", \"order_date\": \"2025-12-08\", \"due_date\": \"2026-01-08\", \"vendor\": \"Ashcroft Components\", \"terms\": \"Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"JH-0208\", \"description\": \"Joist hanger, 2x8\", \"quantity\": 2, \"unit_price_cents\": 1988, \"amount_cents\": 3976}, {\"row\": 2, \"sku\": \"SD-1200\", \"description\": \"Self-drilling screw #12\", \"quantity\": 23, \"unit_price_cents\": 2997, \"amount_cents\": 68931}, {\"row\": 3, \"sku\": \"FW-10SS\", \"description\": \"Flat washer M10, stainless\", \"quantity\": 5, \"unit_price_cents\": 13786, \"amount_cents\": 68930}, {\"row\": 4, \"sku\": \"TR-0372\", \"description\": \"Threaded rod 3/8in, 6ft\", \"quantity\": 29, \"unit_price_cents\": 7803, \"amount_cents\": 226287}, {\"row\": 5, \"sku\": \"LN-10NY\", \"description\": \"Nylon lock nut M10\", \"quantity\": 29, \"unit_price_cents\": 6754, \"amount_cents\": 195866}], \"subtotal_cents\": 563990, \"tax_cents\": 46529, \"total_cents\": 610519}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            68,
+            119,
+            126,
+            132
+          ],
+          "subtotal_cents": [
+            634,
+            338,
+            683,
+            350
+          ],
+          "total_cents": [
+            634,
+            366,
+            683,
+            379
+          ]
+        },
+        "row_count": 5
+      }
+    },
+    {
+      "doc_id": "PO00026",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 965,
+        "output_tokens": 868,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-88910\", \"order_date\": \"2025-08-16\", \"due_date\": \"2025-10-16\", \"vendor\": \"Ashcroft Components\", \"terms\": \"Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"AB-0506\", \"description\": \"Anchor bolt 1/2in x 6in\", \"quantity\": 11, \"unit_price_cents\": 5917, \"amount_cents\": 65087}, {\"row\": 2, \"sku\": \"SS-1403\", \"description\": \"Structural screw #14 x 3in\", \"quantity\": 10, \"unit_price_cents\": 8224, \"amount_cents\": 82240}, {\"row\": 3, \"sku\": \"HB-1040Z\", \"description\": \"Hex bolt M10x40, zinc\", \"quantity\": 35, \"unit_price_cents\": 2350, \"amount_cents\": 82250}, {\"row\": 4, \"sku\": \"FW-10SS\", \"description\": \"Flat washer M10, stainless\", \"quantity\": 11, \"unit_price_cents\": 5065, \"amount_cents\": 55715}, {\"row\": 5, \"sku\": \"LN-10NY\", \"description\": \"Nylon lock nut M10\", \"quantity\": 30, \"unit_price_cents\": 9191, \"amount_cents\": 275730}], \"subtotal_cents\": 561022, \"tax_cents\": 46284, \"total_cents\": 607306}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            69,
+            119,
+            118,
+            131
+          ],
+          "subtotal_cents": [
+            634,
+            338,
+            685,
+            350
+          ],
+          "total_cents": [
+            634,
+            365,
+            692,
+            379
+          ]
+        },
+        "row_count": 5
+      }
+    },
+    {
+      "doc_id": "PO00027",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 921,
+        "output_tokens": 575,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-87472\", \"order_date\": \"2026-11-11\", \"due_date\": \"2027-01-11\", \"vendor\": \"Ashcroft Components\", \"terms\": \"2/10 Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"TR-0372\", \"description\": \"Threaded rod 3/8in, 6ft\", \"quantity\": 36, \"unit_price_cents\": 6893, \"amount_cents\": 248148}, {\"row\": 2, \"sku\": \"PB-0404\", \"description\": \"Post base, 4x4 adjustable\", \"quantity\": 34, \"unit_price_cents\": 666, \"amount_cents\": 22644}, {\"row\": 3, \"sku\": \"SS-1403\", \"description\": \"Structural screw #14 x 3in\", \"quantity\": 18, \"unit_price_cents\": 1258, \"amount_cents\": 22644}], \"subtotal_cents\": 293436, \"tax_cents\": 24208, \"total_cents\": 317644}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            68,
+            120,
+            120,
+            132
+          ],
+          "subtotal_cents": [
+            634,
+            310,
+            683,
+            322
+          ],
+          "total_cents": [
+            634,
+            338,
+            692,
+            352
+          ]
+        },
+        "row_count": 3
+      }
+    },
+    {
+      "doc_id": "PO00028",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 965,
+        "output_tokens": 647,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-78096\", \"order_date\": \"2026-03-17\", \"due_date\": \"2026-04-17\", \"vendor\": \"Brightwater Tooling\", \"terms\": \"Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"TR-0372\", \"description\": \"Threaded rod 3/8in, 6ft\", \"quantity\": 31, \"unit_price_cents\": 1077, \"amount_cents\": 33387}, {\"row\": 2, \"sku\": \"AB-0506\", \"description\": \"Anchor bolt 1/2in x 6in\", \"quantity\": 31, \"unit_price_cents\": 289, \"amount_cents\": 8959}, {\"row\": 3, \"sku\": \"CS-0375\", \"description\": \"Concrete sleeve anchor 3/8\", \"quantity\": 35, \"unit_price_cents\": 256, \"amount_cents\": 8960}, {\"row\": 4, \"sku\": \"JH-0208\", \"description\": \"Joist hanger, 2x8\", \"quantity\": 33, \"unit_price_cents\": 6696, \"amount_cents\": 220968}, {\"row\": 5, \"sku\": \"PB-0404\", \"description\": \"Post base, 4x4 adjustable\", \"quantity\": 27, \"unit_price_cents\": 7562, \"amount_cents\": 204174}], \"subtotal_cents\": 476448, \"tax_cents\": 39307, \"total_cents\": 515755}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            69,
+            121,
+            131,
+            132
+          ],
+          "subtotal_cents": [
+            635,
+            339,
+            685,
+            350
+          ],
+          "total_cents": [
+            635,
+            366,
+            693,
+            379
+          ]
+        },
+        "row_count": 5
+      }
+    },
+    {
+      "doc_id": "PO00029",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 921,
+        "output_tokens": 580,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-44390\", \"order_date\": \"2026-11-18\", \"due_date\": \"2027-01-18\", \"vendor\": \"Cascade Industrial\", \"terms\": \"Net 45\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"JH-0208\", \"description\": \"Joist hanger, 2x8\", \"quantity\": 22, \"unit_price_cents\": 9395, \"amount_cents\": 206690}, {\"row\": 2, \"sku\": \"PB-0404\", \"description\": \"Post base, 4x4 adjustable\", \"quantity\": 22, \"unit_price_cents\": 3767, \"amount_cents\": 82874}, {\"row\": 3, \"sku\": \"SD-1200\", \"description\": \"Self-drilling screw #12\", \"quantity\": 3, \"unit_price_cents\": 27625, \"amount_cents\": 82875}], \"subtotal_cents\": 372439, \"tax_cents\": 30726, \"total_cents\": 403165}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            70,
+            120,
+            120,
+            133
+          ],
+          "subtotal_cents": [
+            634,
+            310,
+            682,
+            322
+          ],
+          "total_cents": [
+            634,
+            337,
+            690,
+            351
+          ]
+        },
+        "row_count": 3
+      }
+    },
+    {
+      "doc_id": "PO00030",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 965,
+        "output_tokens": 724,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-51317\", \"order_date\": \"2025-08-19\", \"due_date\": \"2025-11-19\", \"vendor\": \"Fairmont Materials\", \"terms\": \"2/10 Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"JH-0208\", \"description\": \"Joist hanger, 2x8\", \"quantity\": 19, \"unit_price_cents\": 88, \"amount_cents\": 1672}, {\"row\": 2, \"sku\": \"AB-0506\", \"description\": \"Anchor bolt 1/2in x 6in\", \"quantity\": 14, \"unit_price_cents\": 2337, \"amount_cents\": 32718}, {\"row\": 3, \"sku\": \"PB-0404\", \"description\": \"Post base, 4x4 adjustable\", \"quantity\": 33, \"unit_price_cents\": 991, \"amount_cents\": 32703}, {\"row\": 4, \"sku\": \"CS-0375\", \"description\": \"Concrete sleeve anchor 3/8\", \"quantity\": 4, \"unit_price_cents\": 921, \"amount_cents\": 3684}, {\"row\": 5, \"sku\": \"SD-1200\", \"description\": \"Self-drilling screw #12\", \"quantity\": 38, \"unit_price_cents\": 846, \"amount_cents\": 32148}, {\"row\": 6, \"sku\": \"FW-10SS\", \"description\": \"Flat washer M10, stainless\", \"quantity\": 29, \"unit_price_cents\": 871, \"amount_cents\": 25259}], \"subtotal_cents\": 128184, \"tax_cents\": 10575, \"total_cents\": 138759}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            71,
+            120,
+            130,
+            133
+          ],
+          "subtotal_cents": [
+            630,
+            352,
+            683,
+            364
+          ],
+          "total_cents": [
+            630,
+            380,
+            683,
+            392
+          ]
+        },
+        "row_count": 6
+      }
+    },
+    {
+      "doc_id": "PO00031",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 921,
+        "output_tokens": 581,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-52403\", \"order_date\": \"2025-11-24\", \"due_date\": \"2026-01-24\", \"vendor\": \"Northgate Trading\", \"terms\": \"2/10 Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"AB-0506\", \"description\": \"Anchor bolt 1/2in x 6in\", \"quantity\": 14, \"unit_price_cents\": 2825, \"amount_cents\": 39550}, {\"row\": 2, \"sku\": \"SS-1403\", \"description\": \"Structural screw #14 x 3in\", \"quantity\": 39, \"unit_price_cents\": 6220, \"amount_cents\": 242580}, {\"row\": 3, \"sku\": \"SD-1200\", \"description\": \"Self-drilling screw #12\", \"quantity\": 25, \"unit_price_cents\": 9703, \"amount_cents\": 242575}], \"subtotal_cents\": 524705, \"tax_cents\": 43288, \"total_cents\": 567993}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            71,
+            126,
+            114,
+            138
+          ],
+          "subtotal_cents": [
+            627,
+            311,
+            683,
+            323
+          ],
+          "total_cents": [
+            627,
+            339,
+            681,
+            352
+          ]
+        },
+        "row_count": 3
+      }
+    },
+    {
+      "doc_id": "PO00032",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 921,
+        "output_tokens": 730,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-48961\", \"order_date\": \"2026-06-26\", \"due_date\": \"2026-07-26\", \"vendor\": \"Ridgeline Supply Co\", \"terms\": \"Net 60\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"CS-0375\", \"description\": \"Concrete sleeve anchor 3/8\", \"quantity\": 32, \"unit_price_cents\": 1408, \"amount_cents\": 45056}, {\"row\": 2, \"sku\": \"HB-1040Z\", \"description\": \"Hex bolt M10x40, zinc\", \"quantity\": 34, \"unit_price_cents\": 4252, \"amount_cents\": 144568}, {\"row\": 3, \"sku\": \"AB-0506\", \"description\": \"Anchor bolt 1/2in x 6in\", \"quantity\": 30, \"unit_price_cents\": 4819, \"amount_cents\": 144570}, {\"row\": 4, \"sku\": \"SS-1403\", \"description\": \"Structural screw #14 x 3in\", \"quantity\": 40, \"unit_price_cents\": 7413, \"amount_cents\": 296520}], \"subtotal_cents\": 630714, \"tax_cents\": 52034, \"total_cents\": 682748}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            69,
+            120,
+            119,
+            133
+          ],
+          "subtotal_cents": [
+            631,
+            325,
+            683,
+            337
+          ],
+          "total_cents": [
+            631,
+            352,
+            692,
+            365
+          ]
+        },
+        "row_count": 4
+      }
+    },
+    {
+      "doc_id": "PO00033",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 965,
+        "output_tokens": 733,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-57329\", \"order_date\": \"2026-03-18\", \"due_date\": \"2026-06-18\", \"vendor\": \"Ridgeline Supply Co\", \"terms\": \"Net 30\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"TR-0372\", \"description\": \"Threaded rod 3/8in, 6ft\", \"quantity\": 2, \"unit_price_cents\": 956, \"amount_cents\": 1912}, {\"row\": 2, \"sku\": \"AB-0506\", \"description\": \"Anchor bolt 1/2in x 6in\", \"quantity\": 9, \"unit_price_cents\": 1754, \"amount_cents\": 15786}, {\"row\": 3, \"sku\": \"LN-10NY\", \"description\": \"Nylon lock nut M10\", \"quantity\": 9, \"unit_price_cents\": 1754, \"amount_cents\": 15786}, {\"row\": 4, \"sku\": \"PB-0404\", \"description\": \"Post base, 4x4 adjustable\", \"quantity\": 31, \"unit_price_cents\": 5665, \"amount_cents\": 175615}, {\"row\": 5, \"sku\": \"HB-1040Z\", \"description\": \"Hex bolt M10x40, zinc\", \"quantity\": 12, \"unit_price_cents\": 7167, \"amount_cents\": 86004}, {\"row\": 6, \"sku\": \"JH-0208\", \"description\": \"Joist hanger, 2x8\", \"quantity\": 27, \"unit_price_cents\": 5238, \"amount_cents\": 141426}], \"subtotal_cents\": 436529, \"tax_cents\": 36014, \"total_cents\": 472543}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            70,
+            121,
+            121,
+            132
+          ],
+          "subtotal_cents": [
+            632,
+            353,
+            681,
+            363
+          ],
+          "total_cents": [
+            632,
+            381,
+            681,
+            392
+          ]
+        },
+        "row_count": 6
+      }
+    },
+    {
+      "doc_id": "PO00034",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 921,
+        "output_tokens": 745,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-65255\", \"order_date\": \"2025-06-11\", \"due_date\": \"2025-07-11\", \"vendor\": \"Kingsford Metals\", \"terms\": \"Due on receipt\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"FW-10SS\", \"description\": \"Flat washer M10, stainless\", \"quantity\": 21, \"unit_price_cents\": 6583, \"amount_cents\": 138243}, {\"row\": 2, \"sku\": \"AB-0506\", \"description\": \"Anchor bolt 1/2in x 6in\", \"quantity\": 15, \"unit_price_cents\": 289, \"amount_cents\": 4335}, {\"row\": 3, \"sku\": \"TR-0372\", \"description\": \"Threaded rod 3/8in, 6ft\", \"quantity\": 18, \"unit_price_cents\": 241, \"amount_cents\": 4338}, {\"row\": 4, \"sku\": \"HB-1040Z\", \"description\": \"Hex bolt M10x40, zinc\", \"quantity\": 31, \"unit_price_cents\": 7265, \"amount_cents\": 225215}], \"subtotal_cents\": 372131, \"tax_cents\": 30701, \"total_cents\": 402832}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            68,
+            120,
+            121,
+            133
+          ],
+          "subtotal_cents": [
+            632,
+            322,
+            675,
+            335
+          ],
+          "total_cents": [
+            632,
+            352,
+            683,
+            366
+          ]
+        },
+        "row_count": 4
+      }
+    },
+    {
+      "doc_id": "PO00035",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 921,
+        "output_tokens": 502,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-79610\", \"order_date\": \"2026-10-28\", \"due_date\": \"2026-12-28\", \"vendor\": \"Ridgeline Supply Co\", \"terms\": \"Due on receipt\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"FW-10SS\", \"description\": \"Flat washer M10, stainless\", \"quantity\": 34, \"unit_price_cents\": 7123, \"amount_cents\": 242182}, {\"row\": 2, \"sku\": \"LN-10NY\", \"description\": \"Nylon lock nut M10\", \"quantity\": 35, \"unit_price_cents\": 1205, \"amount_cents\": 42175}, {\"row\": 3, \"sku\": \"AB-0506\", \"description\": \"Anchor bolt 1/2in x 6in\", \"quantity\": 33, \"unit_price_cents\": 1278, \"amount_cents\": 42174}], \"subtotal_cents\": 326531, \"tax_cents\": 26939, \"total_cents\": 353470}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            68,
+            119,
+            125,
+            133
+          ],
+          "subtotal_cents": [
+            629,
+            310,
+            683,
+            322
+          ],
+          "total_cents": [
+            627,
+            338,
+            683,
+            351
+          ]
+        },
+        "row_count": 3
+      }
+    },
+    {
+      "doc_id": "PO00036",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 965,
+        "output_tokens": 733,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-63173\", \"order_date\": \"2025-04-08\", \"due_date\": \"2025-05-08\", \"vendor\": \"Kingsford Metals\", \"terms\": \"Due on receipt\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"JH-0208\", \"description\": \"Joist hanger, 2x8\", \"quantity\": 22, \"unit_price_cents\": 5062, \"amount_cents\": 111364}, {\"row\": 2, \"sku\": \"PB-0404\", \"description\": \"Post base, 4x4 adjustable\", \"quantity\": 32, \"unit_price_cents\": 3240, \"amount_cents\": 103680}, {\"row\": 3, \"sku\": \"CS-0375\", \"description\": \"Concrete sleeve anchor 3/8\", \"quantity\": 18, \"unit_price_cents\": 5760, \"amount_cents\": 103680}, {\"row\": 4, \"sku\": \"HB-1040Z\", \"description\": \"Hex bolt M10x40, zinc\", \"quantity\": 36, \"unit_price_cents\": 1544, \"amount_cents\": 55584}, {\"row\": 5, \"sku\": \"FW-10SS\", \"description\": \"Flat washer M10, stainless\", \"quantity\": 7, \"unit_price_cents\": 9553, \"amount_cents\": 66871}], \"subtotal_cents\": 441179, \"tax_cents\": 36397, \"total_cents\": 477576}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            68,
+            119,
+            121,
+            132
+          ],
+          "subtotal_cents": [
+            633,
+            338,
+            681,
+            350
+          ],
+          "total_cents": [
+            628,
+            366,
+            695,
+            380
+          ]
+        },
+        "row_count": 5
+      }
+    },
+    {
+      "doc_id": "PO00037",
+      "exact": true,
+      "wrong_fields": [],
+      "verdicts": {
+        "0_bare": {
+          "accepted": true,
+          "reason": ""
+        },
+        "1_json_mode": {
+          "accepted": true,
+          "reason": ""
+        },
+        "2_typed": {
+          "accepted": true,
+          "reason": ""
+        },
+        "3_strict_schema": {
+          "accepted": true,
+          "reason": ""
+        },
+        "4_cross_field": {
+          "accepted": true,
+          "reason": ""
+        },
+        "5_grounded": {
+          "accepted": true,
+          "reason": ""
+        },
+        "6_reread": {
+          "accepted": true,
+          "reason": ""
+        }
+      },
+      "usage": {
+        "input_tokens": 965,
+        "output_tokens": 850,
+        "model": "claude-opus-5",
+        "stop_reason": "end_turn"
+      },
+      "payload": "{\"po_number\": \"PO-44185\", \"order_date\": \"2026-01-21\", \"due_date\": \"2026-04-21\", \"vendor\": \"Brightwater Tooling\", \"terms\": \"Net 45\", \"currency\": \"USD\", \"line_items\": [{\"row\": 1, \"sku\": \"CS-0375\", \"description\": \"Concrete sleeve anchor 3/8\", \"quantity\": 28, \"unit_price_cents\": 329, \"amount_cents\": 9212}, {\"row\": 2, \"sku\": \"HB-1040Z\", \"description\": \"Hex bolt M10x40, zinc\", \"quantity\": 4, \"unit_price_cents\": 345, \"amount_cents\": 1380}, {\"row\": 3, \"sku\": \"FW-10SS\", \"description\": \"Flat washer M10, stainless\", \"quantity\": 28, \"unit_price_cents\": 49, \"amount_cents\": 1372}, {\"row\": 4, \"sku\": \"PB-0404\", \"description\": \"Post base, 4x4 adjustable\", \"quantity\": 35, \"unit_price_cents\": 6721, \"amount_cents\": 235235}, {\"row\": 5, \"sku\": \"SS-1403\", \"description\": \"Structural screw #14 x 3in\", \"quantity\": 4, \"unit_price_cents\": 3878, \"amount_cents\": 15512}], \"subtotal_cents\": 262711, \"tax_cents\": 21674, \"total_cents\": 284385}",
+      "evidence": {
+        "citations": {
+          "po_number": [
+            69,
+            121,
+            130,
+            133
+          ],
+          "subtotal_cents": [
+            632,
+            339,
+            682,
+            351
+          ],
+          "total_cents": [
+            628,
+            366,
+            680,
+            379
+          ]
+        },
+        "row_count": 5
+      }
+    }
+  ]
+}

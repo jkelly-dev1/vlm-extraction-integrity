@@ -1,0 +1,216 @@
+{
+  "source_run": "audit/degrade_run.json",
+  "note": "Re-grade of saved payloads against the current ladder. No model was called; nothing was billed. The payloads predate rung 7, so they cannot have been influenced by its design.",
+  "rungs": [
+    "0_bare",
+    "1_json_mode",
+    "2_typed",
+    "3_strict_schema",
+    "4_cross_field",
+    "5_grounded",
+    "6_reread",
+    "7_catalog"
+  ],
+  "by_level": {
+    "clean": {
+      "0_bare": {
+        "caught": 0,
+        "of": 0,
+        "false_rejections": 0,
+        "of_correct": 25
+      },
+      "1_json_mode": {
+        "caught": 0,
+        "of": 0,
+        "false_rejections": 0,
+        "of_correct": 25
+      },
+      "2_typed": {
+        "caught": 0,
+        "of": 0,
+        "false_rejections": 0,
+        "of_correct": 25
+      },
+      "3_strict_schema": {
+        "caught": 0,
+        "of": 0,
+        "false_rejections": 0,
+        "of_correct": 25
+      },
+      "4_cross_field": {
+        "caught": 0,
+        "of": 0,
+        "false_rejections": 0,
+        "of_correct": 25
+      },
+      "5_grounded": {
+        "caught": 0,
+        "of": 0,
+        "false_rejections": 0,
+        "of_correct": 25
+      },
+      "6_reread": {
+        "caught": 0,
+        "of": 0,
+        "false_rejections": 0,
+        "of_correct": 25
+      },
+      "7_catalog": {
+        "caught": 0,
+        "of": 0,
+        "false_rejections": 0,
+        "of_correct": 25
+      }
+    },
+    "light": {
+      "0_bare": {
+        "caught": 0,
+        "of": 0,
+        "false_rejections": 0,
+        "of_correct": 25
+      },
+      "1_json_mode": {
+        "caught": 0,
+        "of": 0,
+        "false_rejections": 0,
+        "of_correct": 25
+      },
+      "2_typed": {
+        "caught": 0,
+        "of": 0,
+        "false_rejections": 0,
+        "of_correct": 25
+      },
+      "3_strict_schema": {
+        "caught": 0,
+        "of": 0,
+        "false_rejections": 0,
+        "of_correct": 25
+      },
+      "4_cross_field": {
+        "caught": 0,
+        "of": 0,
+        "false_rejections": 0,
+        "of_correct": 25
+      },
+      "5_grounded": {
+        "caught": 0,
+        "of": 0,
+        "false_rejections": 2,
+        "of_correct": 25
+      },
+      "6_reread": {
+        "caught": 0,
+        "of": 0,
+        "false_rejections": 2,
+        "of_correct": 25
+      },
+      "7_catalog": {
+        "caught": 0,
+        "of": 0,
+        "false_rejections": 2,
+        "of_correct": 25
+      }
+    },
+    "moderate": {
+      "0_bare": {
+        "caught": 0,
+        "of": 19,
+        "false_rejections": 0,
+        "of_correct": 6
+      },
+      "1_json_mode": {
+        "caught": 0,
+        "of": 19,
+        "false_rejections": 0,
+        "of_correct": 6
+      },
+      "2_typed": {
+        "caught": 0,
+        "of": 19,
+        "false_rejections": 0,
+        "of_correct": 6
+      },
+      "3_strict_schema": {
+        "caught": 0,
+        "of": 19,
+        "false_rejections": 0,
+        "of_correct": 6
+      },
+      "4_cross_field": {
+        "caught": 1,
+        "of": 19,
+        "false_rejections": 0,
+        "of_correct": 6
+      },
+      "5_grounded": {
+        "caught": 2,
+        "of": 19,
+        "false_rejections": 1,
+        "of_correct": 6
+      },
+      "6_reread": {
+        "caught": 2,
+        "of": 19,
+        "false_rejections": 1,
+        "of_correct": 6
+      },
+      "7_catalog": {
+        "caught": 17,
+        "of": 19,
+        "false_rejections": 1,
+        "of_correct": 6
+      }
+    },
+    "heavy": {
+      "0_bare": {
+        "caught": 0,
+        "of": 25,
+        "false_rejections": 0,
+        "of_correct": 0
+      },
+      "1_json_mode": {
+        "caught": 0,
+        "of": 25,
+        "false_rejections": 0,
+        "of_correct": 0
+      },
+      "2_typed": {
+        "caught": 0,
+        "of": 25,
+        "false_rejections": 0,
+        "of_correct": 0
+      },
+      "3_strict_schema": {
+        "caught": 0,
+        "of": 25,
+        "false_rejections": 0,
+        "of_correct": 0
+      },
+      "4_cross_field": {
+        "caught": 25,
+        "of": 25,
+        "false_rejections": 0,
+        "of_correct": 0
+      },
+      "5_grounded": {
+        "caught": 25,
+        "of": 25,
+        "false_rejections": 0,
+        "of_correct": 0
+      },
+      "6_reread": {
+        "caught": 25,
+        "of": 25,
+        "false_rejections": 0,
+        "of_correct": 0
+      },
+      "7_catalog": {
+        "caught": 25,
+        "of": 25,
+        "false_rejections": 0,
+        "of_correct": 0
+      }
+    }
+  }
+}

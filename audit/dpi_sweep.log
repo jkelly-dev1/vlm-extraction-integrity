@@ -1,0 +1,133 @@
+model            claude-opus-5
+design           15 documents x 7 resolutions = 105 calls (paired, resolution is the only variable)
+  150 DPI     660 visual tokens
+  130 DPI     494 visual tokens
+  120 DPI     432 visual tokens
+  110 DPI     363 visual tokens
+  100 DPI     300 visual tokens
+   90 DPI     243 visual tokens
+   80 DPI     192 visual tokens
+estimated tokens 84,360 in / 94,500 out
+ESTIMATED COST   $2.78  (list prices verified 2026-08-10)
+  150 DPI  PO00000  exact
+  150 DPI  PO00001  exact
+  150 DPI  PO00002  exact
+  150 DPI  PO00003  exact
+  150 DPI  PO00004  exact
+  150 DPI  PO00005  exact
+  150 DPI  PO00006  exact
+  150 DPI  PO00007  exact
+  150 DPI  PO00008  exact
+  150 DPI  PO00009  exact
+  150 DPI  PO00010  exact
+  150 DPI  PO00011  exact
+  150 DPI  PO00012  exact
+  150 DPI  PO00013  exact
+  150 DPI  PO00014  exact
+  130 DPI  PO00000  exact
+  130 DPI  PO00001  exact
+  130 DPI  PO00002  exact
+  130 DPI  PO00003  exact
+  130 DPI  PO00004  exact
+  130 DPI  PO00005  exact
+  130 DPI  PO00006  exact
+  130 DPI  PO00007  exact
+  130 DPI  PO00008  exact
+  130 DPI  PO00009  exact
+  130 DPI  PO00010  exact
+  130 DPI  PO00011  exact
+  130 DPI  PO00012  exact
+  130 DPI  PO00013  exact
+  130 DPI  PO00014  exact
+  120 DPI  PO00000  exact
+  120 DPI  PO00001  exact
+  120 DPI  PO00002  exact
+  120 DPI  PO00003  exact
+  120 DPI  PO00004  exact
+  120 DPI  PO00005  exact
+  120 DPI  PO00006  exact
+  120 DPI  PO00007  exact
+  120 DPI  PO00008  exact
+  120 DPI  PO00009  exact
+  120 DPI  PO00010  exact
+  120 DPI  PO00011  exact
+  120 DPI  PO00012  exact
+  120 DPI  PO00013  exact
+  120 DPI  PO00014  exact
+  110 DPI  PO00000  exact
+  110 DPI  PO00001  value_consistent: line_items[2].sku
+  110 DPI  PO00002  exact
+  110 DPI  PO00003  exact
+  110 DPI  PO00004  exact
+  110 DPI  PO00005  exact
+  110 DPI  PO00006  exact
+  110 DPI  PO00007  exact
+  110 DPI  PO00008  value_consistent: line_items[2].sku
+  110 DPI  PO00009  exact
+  110 DPI  PO00010  exact
+  110 DPI  PO00011  exact
+  110 DPI  PO00012  exact
+  110 DPI  PO00013  value_consistent: line_items[1].sku
+  110 DPI  PO00014  exact
+  100 DPI  PO00000  exact
+  100 DPI  PO00001  value_consistent: line_items[2].sku
+  100 DPI  PO00002  exact
+  100 DPI  PO00003  exact
+  100 DPI  PO00004  value_consistent: line_items[0].sku
+  100 DPI  PO00005  exact
+  100 DPI  PO00006  exact
+  100 DPI  PO00007  value_consistent: line_items[1].sku
+  100 DPI  PO00008  value_consistent: line_items[2].sku
+  100 DPI  PO00009  exact
+  100 DPI  PO00010  value_consistent: line_items[4].sku
+  100 DPI  PO00011  exact
+  100 DPI  PO00012  exact
+  100 DPI  PO00013  value_consistent: line_items[1].sku
+  100 DPI  PO00014  exact
+   90 DPI  PO00000  exact
+   90 DPI  PO00001  value_consistent: line_items[2].sku
+   90 DPI  PO00002  exact
+   90 DPI  PO00003  exact
+   90 DPI  PO00004  exact
+   90 DPI  PO00005  value_consistent: line_items[1].sku
+   90 DPI  PO00006  exact
+   90 DPI  PO00007  exact
+   90 DPI  PO00008  value_consistent: line_items[2].sku
+   90 DPI  PO00009  exact
+   90 DPI  PO00010  value_consistent: line_items[4].sku
+   90 DPI  PO00011  exact
+   90 DPI  PO00012  exact
+   90 DPI  PO00013  value_consistent: line_items[1].sku
+   90 DPI  PO00014  exact
+   80 DPI  PO00000  exact
+   80 DPI  PO00001  value_consistent: line_items[1].description,line_items[2].sku
+   80 DPI  PO00002  exact
+   80 DPI  PO00003  value_consistent: line_items[2].sku
+   80 DPI  PO00004  exact
+   80 DPI  PO00005  value_consistent: line_items[1].sku
+   80 DPI  PO00006  exact
+   80 DPI  PO00007  structural: line_items:count
+   80 DPI  PO00008  value_consistent: line_items[2].sku
+   80 DPI  PO00009  value_consistent: line_items[2].sku
+   80 DPI  PO00010  value_consistent: line_items[4].sku
+   80 DPI  PO00011  exact
+   80 DPI  PO00012  exact
+   80 DPI  PO00013  value_consistent: line_items[1].sku
+   80 DPI  PO00014  value_consistent: vendor
+
+1173s   ACTUAL COST $2.39 (71,207 in / 81,473 out) vs $2.78 estimated
+
+ACCURACY AND ERROR FAMILY BY RESOLUTION
+   DPI    exact         error rate   struct  v-incon  v-CONSIST     caught   quiet
+   150   15/15        0% [  0- 20]        0        0          0          0       0
+   130   15/15        0% [  0- 20]        0        0          0          0       0
+   120   15/15        0% [  0- 20]        0        0          0          0       0
+   110   12/15       20% [  7- 45]        0        0          3          3       0
+   100    9/15       40% [ 20- 64]        0        0          6          6       0
+    90   10/15       33% [ 15- 58]        0        0          5          5       0
+    80    6/15       60% [ 36- 80]        1        0          8          9       0
+
+'quiet' = wrong AND accepted by every rung including catalog. That is the number
+that matters: an error nothing downstream can see.
+
+wrote audit/dpi_sweep.json

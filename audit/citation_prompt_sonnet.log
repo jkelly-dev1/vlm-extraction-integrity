@@ -1,0 +1,104 @@
+model            claude-sonnet-5
+design           40 documents x 2 prompts (standard, cite_value) = 80 calls, clean pages only
+page             1228x414 px, 660 visual tokens
+stimulus         2026-08-12-terms-wrap  clean sha256:8acd879873367281
+estimated tokens 86,400 in / 84,000 out
+ESTIMATED COST   $1.01  (list prices verified 2026-08-11)
+  standard   PO00000  RUNG5 REJECT
+  standard   PO00001  ok
+  standard   PO00002  RUNG5 REJECT
+  standard   PO00003  RUNG5 REJECT
+  standard   PO00004  RUNG5 REJECT
+  standard   PO00005  RUNG5 REJECT
+  standard   PO00006  RUNG5 REJECT
+  standard   PO00007  RUNG5 REJECT
+  standard   PO00008  RUNG5 REJECT
+  standard   PO00009  RUNG5 REJECT
+  standard   PO00010  ok
+  standard   PO00011  RUNG5 REJECT
+  standard   PO00012  RUNG5 REJECT
+  standard   PO00013  RUNG5 REJECT
+  standard   PO00014  RUNG5 REJECT
+  standard   PO00015  RUNG5 REJECT
+  standard   PO00016  ok
+  standard   PO00017  RUNG5 REJECT
+  standard   PO00018  RUNG5 REJECT
+  standard   PO00019  RUNG5 REJECT
+  standard   PO00020  RUNG5 REJECT
+  standard   PO00021  ok
+  standard   PO00022  RUNG5 REJECT
+  standard   PO00023  RUNG5 REJECT
+  standard   PO00024  RUNG5 REJECT
+  standard   PO00025  RUNG5 REJECT
+  standard   PO00026  RUNG5 REJECT
+  standard   PO00027  RUNG5 REJECT
+  standard   PO00028  RUNG5 REJECT
+  standard   PO00029  RUNG5 REJECT
+  standard   PO00030  RUNG5 REJECT
+  standard   PO00031  RUNG5 REJECT
+  standard   PO00032  RUNG5 REJECT
+  standard   PO00033  ok
+  standard   PO00034  RUNG5 REJECT
+  standard   PO00035  RUNG5 REJECT
+  standard   PO00036  RUNG5 REJECT
+  standard   PO00037  ok
+  standard   PO00038  RUNG5 REJECT
+  standard   PO00039  RUNG5 REJECT
+  cite_value PO00000  RUNG5 REJECT
+  cite_value PO00001  ok
+  cite_value PO00002  RUNG5 REJECT
+  cite_value PO00003  ok
+  cite_value PO00004  ok
+  cite_value PO00005  ok
+  cite_value PO00006  ok
+  cite_value PO00007  RUNG5 REJECT
+  cite_value PO00008  RUNG5 REJECT
+  cite_value PO00009  RUNG5 REJECT
+  cite_value PO00010  ok
+  cite_value PO00011  ok
+  cite_value PO00012  ok
+  cite_value PO00013  ok
+  cite_value PO00014  RUNG5 REJECT
+  cite_value PO00015  RUNG5 REJECT
+  cite_value PO00016  ok
+  cite_value PO00017  RUNG5 REJECT
+  cite_value PO00018  ok
+  cite_value PO00019  ok
+  cite_value PO00020  RUNG5 REJECT
+  cite_value PO00021  ok
+  cite_value PO00022  ok
+  cite_value PO00023  RUNG5 REJECT
+  cite_value PO00024  RUNG5 REJECT
+  cite_value PO00025  RUNG5 REJECT
+  cite_value PO00026  ok
+  cite_value PO00027  ok
+  cite_value PO00028  ok
+  cite_value PO00029  RUNG5 REJECT
+  cite_value PO00030  RUNG5 REJECT
+  cite_value PO00031  RUNG5 REJECT
+  cite_value PO00032  RUNG5 REJECT
+  cite_value PO00033  ok
+  cite_value PO00034  RUNG5 REJECT
+  cite_value PO00035  RUNG5 REJECT
+  cite_value PO00036  ok
+  cite_value PO00037  ok
+  cite_value PO00038  RUNG5 REJECT
+  cite_value PO00039  RUNG5 REJECT
+
+738s   ACTUAL COST $0.78 (78,640 in / 61,933 out) vs $1.01 estimated
+
+FALSE REJECTIONS AT RUNG 5 (clean pages, so every rejection is a false one)
+  prompt         rejected    exact   95% Wilson
+  standard       34/40      40/40    [ 71- 93]
+  cite_value     20/40      40/40    [ 35- 65]
+
+CITATION GEOMETRY BY FIELD (dy > 0 means the box sits ABOVE the printed value)
+  prompt       field              overlap  median dy
+  standard     po_number           9/40          +14
+  standard     total_cents        27/40           +0
+  standard     subtotal_cents     25/40           -1
+  cite_value   po_number          24/40           +1
+  cite_value   total_cents        30/40           +0
+  cite_value   subtotal_cents     29/40           -1
+
+wrote audit/citation_prompt_sonnet.json
