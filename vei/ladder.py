@@ -26,6 +26,7 @@ invalidate every result already recorded in audit/.
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass
 from typing import Callable
 
@@ -52,6 +53,10 @@ _ALLOWED_TOP = {
 }
 _REQUIRED_TOP = _ALLOWED_TOP - {"terms"}
 _INT_FIELDS = ("subtotal_cents", "tax_cents", "total_cents")
+# Typed as strings at rung 2. `currency` is left to rung 3's enum, so a null
+# currency is rejected where it always was.
+_STR_FIELDS = ("po_number", "vendor", "order_date", "due_date")
+_ISO_DATE = re.compile(r"\d{4}-\d{2}-\d{2}")
 
 
 @dataclass(frozen=True)
@@ -109,6 +114,9 @@ def rung_typed(payload: str, doc: Document, evidence: dict | None) -> Verdict:
             return _no("2_typed", f"{f} is {type(obj[f]).__name__}, want int")
     if obj.get("due_date") is None or obj.get("order_date") is None:
         return _no("2_typed", "null in a required date")
+    for f in _STR_FIELDS:
+        if not isinstance(obj[f], str):
+            return _no("2_typed", f"{f} is {type(obj[f]).__name__}, want str")
     if not isinstance(obj.get("line_items"), list) or not obj["line_items"]:
         return _no("2_typed", "line_items missing or empty")
     return _ok("2_typed")
@@ -128,6 +136,9 @@ def rung_strict(payload: str, doc: Document, evidence: dict | None) -> Verdict:
         return _no("3_strict_schema", f"unexpected field(s): {', '.join(extra)}")
     if obj["currency"] != "USD":
         return _no("3_strict_schema", f"currency {obj['currency']!r} not in enum")
+    for f in ("order_date", "due_date"):
+        if not _ISO_DATE.fullmatch(obj[f]):
+            return _no("3_strict_schema", f"{f} {obj[f]!r} is not YYYY-MM-DD")
     for f in _INT_FIELDS:
         if not (0 <= obj[f] <= 100_000_000):
             return _no("3_strict_schema", f"{f} out of range")
@@ -185,6 +196,14 @@ def _overlaps(a, b) -> bool:
     return not (ax1 < bx0 or bx1 < ax0 or ay1 < by0 or by1 < ay0)
 
 
+def _is_box(value) -> bool:
+    """Four numbers. A model can return anything in a citation slot, and a
+    malformed one is a rejection, not an exception that ends a paid run."""
+    return (isinstance(value, (list, tuple)) and len(value) == 4
+            and all(isinstance(n, (int, float)) and not isinstance(n, bool)
+                    for n in value))
+
+
 def rung_grounded(payload: str, doc: Document, evidence: dict | None) -> Verdict:
     v = rung_cross_field(payload, doc, evidence)
     if not v.accepted:
@@ -193,6 +212,8 @@ def rung_grounded(payload: str, doc: Document, evidence: dict | None) -> Verdict
         return _no("5_grounded", "no citations supplied")
     obj = json.loads(payload)
     cites = evidence["citations"]
+    if not isinstance(cites, dict):
+        return _no("5_grounded", "citations are not a field -> box mapping")
 
     # The row-count check. Cheap, and the only thing in the ladder that
     # catches a dropped row whose arithmetic was recomputed.
@@ -204,6 +225,8 @@ def rung_grounded(payload: str, doc: Document, evidence: dict | None) -> Verdict
     for f in GROUNDED_FIELDS:
         if f not in cites:
             return _no("5_grounded", f"no citation for {f}")
+        if not _is_box(cites[f]):
+            return _no("5_grounded", f"citation for {f} is not a box")
         truth_region = doc.regions.get(f)
         if truth_region is None:
             continue  # unrendered document; nothing to check against

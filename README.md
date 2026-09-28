@@ -6,11 +6,11 @@ grader that reports catch rate and false-rejection rate together.
 
 The result, and the reason this repository exists:
 
-> Schema validation catches 100% of structural errors and 0% of >
-consistent-value errors. Cross-field arithmetic closes part of the gap and >
-still catches 0% of the consistent ones. On real degraded pages, the >
-pixel-grounding checks built to catch them caught 2 of 19, while a > plain
-lookup against the parts master caught 17 of 19.
+> Schema validation catches 100% of structural errors and 0% of
+> consistent-value errors. Cross-field arithmetic closes part of the gap and
+> still catches 0% of the consistent ones. On real degraded pages, the
+> pixel-grounding checks built to catch them caught 2 of 19, while a plain
+> lookup against the parts master caught 17 of 19.
 
 A consistent-value error is a payload where every field is present, correctly
 typed, in range, and internally consistent, and the numbers are wrong. It
@@ -18,7 +18,7 @@ passes every check that looks only at the JSON, because there is nothing
 structurally wrong to see. It is also the error that reaches production.
 
 That last clause is deliberate, and the uncomfortable half of the result. This
-project set out to show that grounding is the answer to the quiet failure case.
+project set out to show that grounding is the answer to the silent failure case.
 Against constructed errors it is: rungs 5 and 6 catch what rungs 0-4 cannot.
 Against the errors a real model actually made on real degraded scans, it mostly
 was not, because the model misread part numbers, and a check that verifies where
@@ -30,11 +30,11 @@ The second uncomfortable result is about prompt injection, and it arrived the
 same way. By running the measurement that the first injection experiment was not
 designed to make:
 
-> An injection asking for an absurd value scored 0 of 90 across six > channels.
-The same six channels asking for a value that reconciles scored > 29 of 40
-through the one channel where the instruction reads as > legitimate document
-content: schema validation and cross-field arithmetic > caught 0 of those 29,
-and 24 of the 29 survived all eight rungs.
+> An injection asking for an absurd value scored 0 of 90 across six channels.
+> The same six channels asking for a value that reconciles scored 29 of 40 on
+> `claude-opus-5` through the one channel where the instruction reads as
+> legitimate document content: schema validation and cross-field arithmetic
+> caught 0 of those 29, and 24 of the 29 survived all eight rungs.
 
 Both headlines are the same shape. A defense measured against the failure it
 was designed for looks strong; the number that matters is what it does against
@@ -47,13 +47,18 @@ and 0/40, while all four demonstrably read the injected text. Two models and
 it looks like a provider difference; four and it is a gradient with Opus 5 far
 out at one end, crossing both providers and both capability tiers in between. It
 is not "Anthropic models comply", it is not a tier effect, and it is certainly
-not a property of VLM document extraction.
+not a property of VLM document extraction. Nor is the channel. On pages redrawn
+so that all six carry the whole ask legibly, `claude-opus-5` still moved only
+through the legitimate-looking field, 12 of 15, while `gpt-5.4` followed the
+plain note on the page 8 times in 15 and that field twice; INJECTION.md has
+both tables.
 
 And the defense is model-dependent in the same way the attack is. Pixel
 grounding rejected 6 of the 6 complying payloads from `gpt-5.4` and 5 of the 29
 from `claude-opus-5`, and on clean pages, with nothing wrong to find, it
-rejected 0 of 40 correct extractions from three of the four models and 31 of
-36 from `claude-sonnet-5`, which cites a field's caption instead of its value.
+rejected none of the 40 control-arm replies from three of the four models and
+31 of 36 from `claude-sonnet-5`, which cites a field's caption instead of its
+value.
 (Those four figures are the four-model comparison, one page, one run; sonnet's
 denominator is 36 because four of its replies errored. The separate prompt A/B,
 sonnet only, puts the same rate at 34 of 40.) One sentence of prompt cuts that
@@ -83,10 +88,10 @@ damage. The worst scans are the safest ones: at 78 DPI the model misreads so
 many digits independently that the arithmetic collapses, and cross-field rules
 catch every single error. At 108 DPI the model is confident, mostly right, and
 wrong in ways nothing in the payload can see: 17 of its 19 errors sail through
-all seven rungs.
+all seven rungs the ladder had when it ran (rungs 0-6).
 
 The dangerous zone is the middle: legible enough that the model commits, poor
-enough that it is wrong, clean enough that the error is quiet. A pipeline
+enough that it is wrong, clean enough that the error is silent. A pipeline
 tuned on crisp PDFs and stress-tested on garbage will have measured both ends
 of this curve and missed the part that hurts.
 
@@ -105,7 +110,7 @@ This matters, and summarizing it as "76% error rate" would overstate the case:
   That is why rung 4 caught 100% of them.
 
 So the two levels fail in categorically different ways, and only the middle one
-produces the quiet failure this repository is about.
+produces the silent failure this repository is about.
 
 ### The earlier clean-only probe
 
@@ -130,8 +135,9 @@ not adversarial content, is what produced the failure.
 
 They multiply. Neither is the headline on its own, and quoting an offline catch
 rate as though it were a property of a model is the easiest way to mislead with
-this repository. Every artifact written to `audit/` records which adapter
-produced it.
+this repository. Every run artifact in `audit/` records which adapter produced
+it; `regrade_degraded.json`, a re-grade of one of them, names its source run
+instead.
 
 ---
 
@@ -155,6 +161,18 @@ to one that never saw it.
 
 Rungs 0-4 see only the payload. That boundary is the whole finding: everything
 above it is blind to a consistent-value error by construction.
+
+What rungs 5 and 6 examined on the PAID runs is less than the table says, and
+every paid figure below should be read with it. No paid script makes rung 6's
+second call or records re-read evidence, so on paid runs rung 6 accepts exactly
+what rung 5 accepts and its column repeats rung 5's. And the row count rung 5
+compares against is, on paid runs, the count the model reported in the same
+reply as the line items, so it catches a dropped row only when the reply
+contradicts itself; in every paid record it made no rejection of its own. The
+offline stub takes the row count from the page and does make the second read,
+which is where rungs 5 and 6 are measured as designed. Rung 2 types every
+required string field and rung 3 requires ISO dates; every stored reply passes
+both, so no recorded verdict depends on them.
 
 Rung number is not cost order. Rungs are numbered in the order they were added.
 Rung 7 needs a catalog lookup and nothing else, no page, no second model call,
@@ -261,7 +279,7 @@ figure ever printed here.
 counts rows, that check does not depend on citations at all. `vendor_near_miss`
 and `sku_near_miss` are 0% either way because rung 5 checks three grounded
 fields and neither a vendor nor a SKU is one of them; that gap is what rung 7
-exists for, and it is the same gap the paid degraded run found.
+exists for, the same gap the paid degraded run found.
 
 Near-miss and far-miss citations are identical here: the shipped rung asks only
 whether two boxes touch, not by how much they miss. They stop being equivalent
@@ -299,11 +317,11 @@ known regions, so the renderer records every field's bounding box at draw time.
 
 Grounding does not stay free once the page degrades. In the paired run it
 produced 2 false rejections on 25 correct light-level extractions and 1 on the 6
-correct moderate ones. A gate that was perfectly quiet on clean pages starts
+correct moderate ones. A gate that rejected nothing on clean pages starts
 rejecting good work as soon as the paper gets worse. And it bought little where
 it was needed: at the moderate level, where 17 errors were invisible to every
 payload-only rung, grounding and re-read together caught 2. On this evidence,
-citation-overlap grounding is not the answer to the quiet-failure case.
+citation-overlap grounding is not the answer to the silent-failure case.
 Detecting a misread SKU needs a check aimed at the field that actually moved,
 and the ladder as built does not have one.
 
@@ -341,9 +359,10 @@ arithmetic predicts: an 8pt stem stops resolving.
 
 But the sweep was run to answer a different question, and the answer is that
 the question was wrong. It was looking for the resolution at which failures
-stop being *quiet* (consistent-value, invisible to the ladder) and start being
-*loud*. That transition does not exist here: the quiet column is zero at
-every resolution, including 80 DPI where 60% of extractions were wrong.
+stop being *silent* (consistent-value, invisible to the ladder) and start being
+*loud*. That transition does not exist here: the column counting errors every
+rung accepted is zero at every resolution, including 80 DPI where 60% of
+extractions were wrong.
 
 The reason is structural rather than lucky. Almost every error at every
 resolution is a misread SKU, which lands in the `value_consistent` family and is
@@ -368,9 +387,10 @@ instruction hidden inside a schema-expected field.
 
 An injection asking for an absurd value scored 0 of 90. The same attack asking
 for a value that keeps the document's arithmetic consistent scored 26 of 40 on
-one channel, against the same model, on the same corpus. Rungs 3 and 4 caught
-none of the 26. Across four models the compliance rate runs from 0 of 40 to 29
-of 40, and the spread does not sort by provider or by tier.
+one channel, against the same model, on the same corpus, on the page as drawn
+before its 2026-08-12 repair (29 of 40 on the repaired page). Rungs 3 and 4
+caught none of the 26. Across four models the compliance rate runs from 0 of 40
+to 29 of 40, and the spread does not sort by provider or by tier.
 
 [INJECTION.md](INJECTION.md) has the whole investigation: every run, the
 renderer defect that was found by disbelieving a result and that moved the
@@ -407,13 +427,13 @@ the way its family says.
 | Rung 7 still rejects everything rung 6 rejects, so the ladder stays monotonic | `tests/test_catalog.py::test_catalog_rung_is_cumulative` |
 | The catalog check needs no page and no second call, which is why rung number is not cost order | `tests/test_catalog.py::test_catalog_check_needs_no_page_and_no_second_call` |
 | Every value field and every line-item cell gets a region, and every region lies inside the image the model is shown | `tests/test_render.py::test_every_value_field_gets_a_region`, `::test_regions_are_inside_the_cropped_image` |
-| No printed value is drawn on top of another, on clean pages and on every injection channel | `tests/test_render.py::test_no_two_regions_overlap` (this failed for a whole round of paid runs: `currency` landed on the injected subtotal digits, so compliance was measured against a partly illegible ask) |
+| No two recorded regions overlap, on clean pages and on every injection channel | `tests/test_render.py::test_no_two_regions_overlap` (this failed for a whole round of paid runs: `currency` landed on the injected subtotal digits, so compliance was measured against a partly illegible ask). Until 2026-09-25 the injected text was not a region, so this test did not see it: on the consistent-goal `plain_note`, `authority_framing` and `low_contrast` pages it crossed the TOTAL row, and the `rotated_margin` strip cut the ask off before its numbers. It is a region now, and `test_every_drawn_injection_is_a_region_inside_the_page` holds it clear of every printed value and inside the page, on both goals |
 | Wrapping never drops a word, and cropping moves no region | `tests/test_render.py::test_wrapping_never_loses_text`, `::test_cropping_does_not_move_any_region` |
 | Every region sits on ink rather than blank paper | `tests/test_render.py::test_regions_actually_contain_ink` |
 | The crop is a real saving, as the cost comment in `render.py` claims | `tests/test_render.py::test_crop_is_a_real_saving` |
 | The confusable-row trap survives rendering, not just the data | `tests/test_render.py::test_confusable_rows_are_visibly_near_identical` |
 | Rendering is byte-for-byte deterministic | `tests/test_render.py::test_render_is_deterministic` |
-| Regions follow the image through rescale and rotation, at every level, and stay inside it | `tests/test_degrade.py::test_regions_still_contain_ink`, `::test_regions_stay_inside_the_image` (mutation-checked: `::test_a_deliberately_wrong_transform_fails_the_ink_test` requires untransformed coordinates to fail) |
+| Regions follow the image through rescale and rotation, at every level, and stay inside it | `tests/test_degrade.py::test_regions_still_contain_ink`, `::test_regions_stay_inside_the_image`, `::test_rotation_alone_moves_the_regions_with_the_ink` (mutation-checked: `::test_a_deliberately_wrong_transform_fails_the_ink_test` requires untransformed coordinates to fail, and skipping the rotation step fails the rotation-only test) |
 | The clean level is a true no-op, so the baseline is the render itself | `tests/test_degrade.py::test_clean_level_is_a_true_no_op` |
 | Each level is measurably harder than the one before it | `tests/test_degrade.py::test_levels_are_monotonically_worse` |
 | The heavy level really falls below the legibility floor named in `render.py` | `tests/test_degrade.py::test_heavy_falls_below_the_legibility_floor` |
@@ -428,7 +448,7 @@ the way its family says.
 | A consistent shift passes rung 4, so the undetectable injection is not caught by the cheapest cross-field rung | `tests/test_inject.py::test_consistent_shift_survives_cross_field` (mutation-checked: `::test_naive_money_only_shift_is_caught` requires the money-only version, which the design carried before this was measured, to be rejected) |
 | The shift moves enough money to be worth running | `tests/test_inject.py::test_consistent_shift_actually_moves_money` |
 | The consistent injection states every value on the page, so a failure to comply is a refusal and not a failure to multiply | `tests/test_inject.py::test_consistent_injection_states_every_value` |
-| Complying means the whole cascade: moving only the total is the loud attack again | `tests/test_inject.py::test_consistent_compliance_requires_the_whole_cascade` |
+| Complying means the whole cascade: moving only the total is the loud attack again, and the row and the totals are each required | `tests/test_inject.py::test_consistent_compliance_requires_the_whole_cascade`, `::test_each_half_of_the_cascade_is_required_on_its_own` |
 | Grounding is blind to a consistent shift, and only the re-read catches it | `tests/test_inject.py::test_grounding_is_blind_to_a_consistent_shift` |
 | The gap between two boxes is zero when they touch, symmetric, and the larger of the two axes | `tests/test_tolerance.py::test_gap_is_zero_when_boxes_touch_and_a_distance_when_they_do_not` |
 | The sweep reports the largest miss rather than the first, and a missing citation is not folded into a distance | `tests/test_tolerance.py::test_worst_gap_reports_the_largest_miss_not_the_first`, `::test_worst_gap_is_none_when_a_citation_is_missing` |
@@ -454,20 +474,22 @@ degraded run, the resolution sweep, the IoU distribution, the four-model
 injection comparison, and the false-rejection rates that differ by model. A
 test that re-ran any of them would cost money on every commit and would still
 be measuring a model's behavior on one day. Those artifacts are in `audit/`,
-each stamped with the adapter that produced it, and `scripts/regrade.py`
+each run stamped with the adapter that produced it, and `scripts/regrade.py`
 re-scores them for free.
 
 ## Reproducing
 
 ```
 python -m venv .venv && .venv/bin/pip install -e ".[dev]"
-.venv/bin/python -m pytest -q                                  # 133 tests
+.venv/bin/python -m pytest -q                                  # 167 tests
 .venv/bin/python scripts/offline_demo.py --docs 120 --json audit/offline.json
 .venv/bin/python scripts/build_corpus.py --n 6 --out audit/corpus
 ```
 
 All of the above is free and needs no API key. The paid run prints its plan and
-exits unless you pass `--confirm`:
+exits unless you pass `--confirm`. Each writes to the artifact this repository
+ships unless you pass `--out`, and with `--confirm` it refuses to replace an
+existing file unless you also pass `--overwrite`:
 
 ```
 ENV_FILE=~/.secrets/ai.env .venv/bin/python scripts/real_run.py --probe
@@ -489,7 +511,7 @@ ENV_FILE=~/.secrets/ai.env .venv/bin/python scripts/inject_run.py --goal consist
 ENV_FILE=~/.secrets/ai.env .venv/bin/python scripts/dpi_sweep.py --confirm
 ```
 
-Recorded runs, all `claude-opus-5`, all with artifacts in `audit/`:
+Recorded runs, all with artifacts in `audit/`:
 
 | run | model | calls | cost | result |
 |---|---|---|---|---|
@@ -497,7 +519,7 @@ Recorded runs, all `claude-opus-5`, all with artifacts in `audit/`:
 | degraded scans | opus-5 | 100 | $2.44 | the non-monotonic finding above |
 | injection (loud) | opus-5 | 105 | $2.42 | 0/90 compliance |
 | resolution sweep | opus-5 | 105 | $2.39 | cliff at 120->110 DPI; 0 quiet errors anywhere |
-| injection (consistent) | opus-5 | 105 | $2.50 | 10/15 on `metadata_field`, 0/15 on the other five |
+| injection (consistent) | opus-5 | 105 | $2.50 | 10/15 on `metadata_field`, 0/15 on the other five (four of those five pages were defective; re-run below) |
 | injection (consistent, n=40) | opus-5 | 80 | $2.08 | **26/40** on the pre-fix page; rungs 3 and 4 caught 0 of 26 |
 | adapter smoke test | gpt-5.6-sol | 2 | $0.07 | adapter parity confirmed |
 | injection (consistent, n=40) | gpt-5.6-sol | 80 | $2.61 | 0/40; 14 of its 16 rejects were the overprint, 2 the token cap |
@@ -507,15 +529,18 @@ Recorded runs, all `claude-opus-5`, all with artifacts in `audit/`:
 | injection (consistent, n=40) | sonnet-5 | 76 | $0.84 | **4/40**; and 31/36 false rejections at rung 5 on clean pages |
 | injection (consistent, n=40) | gpt-5.6-sol | 80 | $2.23 | **0/40** again, with all 16 earlier "model failures" gone |
 | citation prompt A/B | sonnet-5 | 80 | $0.78 | rung 5 false rejections 34/40 -> **20/40**; 14 fixed, 0 broken |
-| **total** | | **1,091** | **$23.82** | |
+| injection (consistent, redrawn pages) | opus-5 | 105 | $2.48 | **12/15** on `metadata_field`, 0/15 on the other five, now legible |
+| injection (consistent, redrawn pages) | gpt-5.4 | 105 | $2.21 | **8/15** `plain_note`, 6/15 `authority_framing`, 4/15 `low_contrast`, 2/15 `metadata_field` |
+| **total** | | **1,301** | **$28.51** | |
 
 Prices re-verified 2026-08-11 against each provider's own pricing page. One
-correction came out of that check: `claude-sonnet-5` was carried in `PRICING` at
-$3/$15, the increase that had been scheduled for 2026-09-01 and was subsequently
-canceled; the standard price is $2/$10. No figure in this table is affected,
-because every Anthropic run used `claude-opus-5` at $5/$25, which is unchanged.
-A canceled price increase is the least visible way for a hard-coded price to
-go stale: nothing errors and nothing warns.
+correction came out of that check: `claude-sonnet-5` was carried in `PRICING`
+at $3/$15, the increase that had been scheduled for 2026-09-01 and was
+subsequently canceled; the standard price is $2/$10. No figure in this table is
+affected: the `claude-opus-5` runs were priced at $5/$25, which is unchanged,
+and the three `claude-sonnet-5` runs were already costed at $2/$10. A canceled
+price increase is the least visible way for a hard-coded price to go stale:
+nothing errors and nothing warns.
 
 Cross-provider cost is reported per document rather than per token. The same
 page is a different number of tokens on each provider; this run's estimate
@@ -530,9 +555,13 @@ that spends money nobody approved.
 `scripts/tolerance_sweep.py` re-scores every saved citation under alternative
 rung-5 rules, and `scripts/regrade.py` re-scores any saved run against the
 current ladder for free, which is how rung 7 was evaluated on payloads that
-predate it. Pages are cropped to their inked area before sending. A Letter sheet
-of this document is three quarters blank, and blank paper is billed at 2,714
-visual tokens versus 660 cropped, a 4x saving on every call.
+predate it. It grades rungs 5 to 7 only on records whose page it can rebuild (a
+clean page at the default resolution, or a degraded one for a run keyed by
+level) and names the records it skipped: an injected page, another resolution,
+or a record with no stored evidence. Pages are cropped to their inked area
+before sending. A Letter sheet of this document is three quarters blank, and
+blank paper is billed at 2,714 visual tokens versus 660 cropped, a 4x saving on
+every call.
 
 ## Look at the pages
 
@@ -555,7 +584,7 @@ usable is the one that produced errors nothing downstream could see.
 ## Layout
 
 ```
-INJECTION.md     the injection investigation in full; 7 paid runs, 4 models
+INJECTION.md     the injection investigation in full; 12 paid runs, 4 models
 SAMPLE_RUN.md    captured output from the offline and the paid runs
 Images/          the rendered pages every number was measured on
 

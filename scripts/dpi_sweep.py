@@ -10,11 +10,11 @@ threshold: when the error rate jumps between moderate and heavy, nothing in
 that experiment says which knob did it. This sweep varies RESOLUTION ALONE,
 with every other degradation held at zero, so the answer is attributable.
 
-What it is looking for. The degraded run found a quiet zone. A band where the
+What it is looking for. The degraded run found a silent zone. A band where the
 model is wrong often and the errors are invisible to payload-only checks. The
 interesting quantity is not just where accuracy falls but where the ERROR
 FAMILY changes: the resolution at which failures stop being consistent-value
-(quiet) and start being inconsistent (loud, and caught by rung 4).
+(silent) and start being inconsistent (loud, and caught by rung 4).
 
 Paired: the same documents at every resolution.
 """
@@ -36,8 +36,9 @@ from vei.grade import wilson                                   # noqa: E402
 from vei.ladder import LADDER                                  # noqa: E402
 from vei.models import ClaudeModel                             # noqa: E402
 from vei.render import DEFAULT_DPI, render, visual_tokens_for  # noqa: E402
-from scripts.real_run import (PRICING, PRICING_VERIFIED, PROMPT,  # noqa: E402
-                              PROMPT_TOKENS, OUTPUT_TOKENS, classify)
+from scripts.real_run import (ANTHROPIC_MODELS, PRICING,       # noqa: E402
+                              PRICING_VERIFIED, PROMPT, PROMPT_TOKENS,
+                              OUTPUT_TOKENS, classify)
 from scripts.degrade_run import family_of                      # noqa: E402
 
 # Concentrated between 90 and 130, because the degraded run already showed
@@ -51,7 +52,8 @@ def main() -> int:
     ap.add_argument("--n", type=int, default=15,
                     help="documents per resolution (default 15)")
     ap.add_argument("--dpi", type=int, nargs="*", default=list(SWEEP))
-    ap.add_argument("--model", default="claude-opus-5", choices=sorted(PRICING))
+    ap.add_argument("--model", default="claude-opus-5", choices=ANTHROPIC_MODELS,
+                    help="this script calls the Anthropic API only")
     ap.add_argument("--effort", default="medium")
     # Authorized by the operator on 2026-08-11 ("ok to run DPI sweep"), after
     # being deferred and disarmed earlier the same day. The ceiling is 4.00
@@ -62,7 +64,16 @@ def main() -> int:
     ap.add_argument("--max-cost", type=float, default=4.00)
     ap.add_argument("--confirm", action="store_true")
     ap.add_argument("--out", type=Path, default=Path("audit/dpi_sweep.json"))
+    ap.add_argument("--overwrite", action="store_true",
+                    help="replace an existing --out file; without it a paid run "
+                         "refuses before it spends anything")
     args = ap.parse_args()
+    # The default --out is an artifact this repository ships. A paid run that
+    # wrote over it would replace published evidence with a new sample.
+    if args.confirm and args.out.exists() and not args.overwrite:
+        print(f"REFUSING TO START: {args.out} exists. Pass another --out, or "
+              f"--overwrite to replace it.")
+        return 2
 
     docs = list(corpus(args.n))
     base = {d.doc_id: render(d, dpi=DEFAULT_DPI) for d in docs}
@@ -177,7 +188,7 @@ def main() -> int:
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps({
-        "adapter": "claude", "model": args.model, "effort": args.effort,
+        "adapter": model.adapter, "model": args.model, "effort": args.effort,
         "design": "paired: same documents at every resolution; resolution is "
                   "the only variable, all other degradation held at zero",
         "n_per_dpi": args.n, "dpi": list(args.dpi),

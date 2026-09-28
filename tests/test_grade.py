@@ -37,7 +37,7 @@ def test_wilson_has_width_at_the_boundaries():
 
 
 def test_wilson_narrows_as_the_sample_grows():
-    """STRICTLY narrower, not merely non-increasing. A function returning a
+    """STRICTLY narrower, not only non-increasing. A function returning a
     constant interval satisfies non-increasing and measures nothing."""
     widths = [wilson(n // 2, n)[1] - wilson(n // 2, n)[0] for n in (10, 40, 200, 1000)]
     for a, b in zip(widths, widths[1:]):

@@ -21,8 +21,10 @@ Within VALUE there is a further split that decides whether rung 4
   INCONSISTENT  the wrong value contradicts another field (a total that no
                 longer equals subtotal + tax, a due date before the order
                 date). Arithmetic catches it.
-  CONSISTENT    the wrong values agree with each other. Shift subtotal, tax
-                and total together and the document still reconciles exactly.
+  CONSISTENT    the wrong values agree with each other. Shift a line item
+                and the subtotal, tax and total with it, and the document
+                still reconciles exactly (moving the three totals alone does
+                not: the line items stop summing to the subtotal).
                 Only evidence outside the payload, meaning where on the page the
                 number was read from, can catch it.
 

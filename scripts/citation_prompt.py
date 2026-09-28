@@ -32,10 +32,10 @@ cost another arm. What it can say is whether the rung is fixable by prompt at
 all, which is the difference between "this check does not work on Sonnet" and
 "this check needs one more sentence on Sonnet".
 
-Paired, and with the baseline re-bought on purpose. Both prompts are sent for
+Paired, and with the baseline bought again. Both prompts are sent for
 every document in the same run, so a difference is a difference in the prompt
 and not in the sample, the day, or the page. The standard-prompt arm re-
-measures a rate already observed twice rather than trusting it; it is the
+measures a rate already observed twice instead of trusting it; it is the
 control, and a control from a different run is not a control.
 """
 

@@ -41,8 +41,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from vei.docs import corpus                                    # noqa: E402
 from vei.grade import wilson                                   # noqa: E402
-from vei.inject import (CHANNELS, CONSISTENT, GOALS, LOUD,     # noqa: E402
-                        METADATA, VISIBILITY,
+from vei.inject import (CHANNELS, CONSISTENT, GOALS,           # noqa: E402
+                        INJECTION_LAYOUT_REVISION, LOUD, METADATA, VISIBILITY,
                         compliance, make_injection,
                         render_with_injection)
 from vei.ladder import LADDER                                  # noqa: E402
@@ -80,12 +80,21 @@ def main() -> int:
     ap.add_argument("--max-cost", type=float, default=4.00)
     ap.add_argument("--confirm", action="store_true")
     ap.add_argument("--out", type=Path, default=Path("audit/inject_run.json"))
+    ap.add_argument("--overwrite", action="store_true",
+                    help="replace an existing --out file; without it a paid run "
+                         "refuses before it spends anything")
     args = ap.parse_args()
+    # The default --out is an artifact this repository ships. A paid run that
+    # wrote over it would replace published evidence with a new sample.
+    if args.confirm and args.out.exists() and not args.overwrite:
+        print(f"REFUSING TO START: {args.out} exists. Pass another --out, or "
+              f"--overwrite to replace it.")
+        return 2
 
     arms = (CONTROL,) + (tuple(args.arms) if args.arms else CHANNELS)
     docs = list(corpus(args.n))
 
-    # Measure a real injected page rather than assuming its size.
+    # Measure a real injected page instead of assuming its size.
     # The stimulus, identified. A compliance rate is a measurement of a PAGE,
     # and on 2026-08-12 the metadata_field page was found to have been drawing
     # the currency value on top of the injected sentence for every paid run
@@ -115,6 +124,7 @@ def main() -> int:
           f"{'s' if len(arms) != 2 else ''}: "
           f"{', '.join(a for a in arms if a != CONTROL)}) = {calls} calls")
     print(f"page             {vw}x{vh} px, {vis:,} visual tokens")
+    print(f"layout           {INJECTION_LAYOUT_REVISION}")
     print(f"stimulus         {RENDER_REVISION}  {first_arm} "
           f"sha256:{stim_sha[:16]}")
     print(f"estimated tokens {tin:,} in / {tout:,} out")
@@ -236,10 +246,9 @@ def main() -> int:
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps({
-        # Taken from the adapter that actually ran, never hard-coded. This
-        # said "claude" unconditionally until 2026-08-11, which was harmless
-        # while Claude was the only adapter and would have silently mislabeled
-        # every OpenAI result as Anthropic's the moment a second one existed.
+        # Taken from the adapter that actually ran, never hard-coded. A fixed
+        # "claude" here would silently label every OpenAI result as
+        # Anthropic's.
         "adapter": model.adapter, "model": args.model, "effort": args.effort,
         "design": "paired: every document also sent with no injection",
         "n_per_arm": args.n, "arms": list(arms),
@@ -252,6 +261,7 @@ def main() -> int:
         "elapsed_s": round(elapsed, 1),
         # Which drawing of the page produced this number. See vei/render.py.
         "render_revision": RENDER_REVISION,
+        "injection_layout_revision": INJECTION_LAYOUT_REVISION,
         "stimulus_sha256": {"arm": first_arm, "doc_id": "PO00000",
                             "dpi": args.dpi, "sha256": stim_sha},
         "pricing_verified": PRICING_VERIFIED,

@@ -13,12 +13,14 @@ concurrency:
 
 jobs:
   # The offline job installs nothing but pytest. The corpus, the error
-  # taxonomy, the ladder and the grader are pure standard library on purpose,
+  # taxonomy, the ladder and the grader are pure standard library,
   # so the measurement can be reproduced without installing anything. If that
   # ever stops being true this job goes red, which is the signal that "the
   # offline half needs no dependencies" has become false. The rendering tests
-  # skip here; -rs prints which ones and why, so a green run shows what was
-  # skipped rather than looking like full coverage.
+  # skip here, and so do the two spend-guard tests whose guard sits after a
+  # page render (the --confirm and --max-cost checks of real_run.py and
+  # inject_run.py); -rs prints which ones and why, so a green run shows what
+  # was skipped instead of looking like full coverage.
   offline:
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -28,9 +30,9 @@ jobs:
         python-version: ["3.11", "3.12", "3.13"]
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - uses: actions/setup-python@v7
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: ${{ matrix.python-version }}
           cache: pip
@@ -58,16 +60,16 @@ jobs:
   # Separate job because it needs Pillow and a font. Everything that draws a
   # page lives here: the renderer, the degradation levels, the injection
   # channels, and the region-overlap check that caught the defect described in
-  # README section "The page was drawing one field on top of another".
+  # INJECTION.md section "The page was drawing one field on top of another".
   # Pillow is pinned to what the recorded runs in audit/ were produced with.
   rendering:
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
     steps:
-      - uses: actions/checkout@v7
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - uses: actions/setup-python@v7
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: "3.12"
           cache: pip
@@ -93,15 +95,16 @@ jobs:
 
       # Re-scores every stored citation against the shipped rung and the two
       # alternatives. Free, no API key, and it fails if an artifact in audit/
-      # stops parsing, which is how a published number goes quietly missing.
+      # stops parsing, which is how a published number goes silently missing.
       - name: Tolerance sweep over the stored artifacts
         env:
           PYTHONPATH: ${{ github.workspace }}
         run: python scripts/tolerance_sweep.py
 
       # A README is prose and drifts; audit/*.json is evidence and does not.
-      # This rebuilds each published figure from the JSON and requires the
+      # This rebuilds the README's run figures from the JSON and requires the
       # exact string, so a re-run that shifts a number fails loudly rather
-      # than leaving the document quietly wrong.
+      # than leaving the document silently wrong. The checker's docstring
+      # names the figures it does not derive.
       - name: README numbers match the shipped results
         run: python scripts/check_readme_numbers.py

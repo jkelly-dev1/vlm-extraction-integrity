@@ -4,17 +4,17 @@
     python scripts/offline_demo.py
     python scripts/offline_demo.py --docs 200 --json audit/offline.json
 
-What this measures, stated plainly: the LADDER, not a model. Every payload
-comes from vei.errors, which constructs each error class deliberately. That
-makes the catch rates exact rather than sampled, but it means these numbers
-say nothing about how often a real VLM commits each error. The real run
-measures that, separately, and the two must never be reported as one figure.
+What this measures: the LADDER, not a model. Every payload comes from
+vei.errors, which constructs each error class by hand. That makes the catch
+rates exact rather than sampled, but it means these numbers say nothing
+about how often a real VLM commits each error. The real run measures that,
+separately, and the two must never be reported as one figure.
 
-RUNG 5's catch rate is not one number, and until 2026-08-12 only one of them
-was published. Whether grounding can see a wrong value depends entirely on an
-assumption nobody had written down: where a model that misread a field says it
-looked. Both are reported, because the gap between them is larger than most
-differences this repository reports as findings.
+RUNG 5's catch rate is not one number. Whether grounding can see a wrong
+value depends entirely on an assumption that has to be stated: where a model
+that misread a field says it looked. Both are reported, because the gap
+between them is larger than most differences this repository reports as
+findings.
 
   Cites where it looked   the model points at the box it actually read, which
                           is not the one it claims. Rung 5 fires. This is the
@@ -110,7 +110,12 @@ def main() -> int:
 
     print(f"vlm-extraction-integrity -- offline ladder measurement")
     print(f"adapter: stub (no model was called)   documents/class: {args.docs}")
-    regions_note = "yes" if render_ok else "NO -- rungs 5/6 degraded"
+    # With no regions the stub cites nothing, so rung 5 rejects every payload
+    # for "no citation" and rungs 5 to 7 print 100% for every class. That is
+    # a rung with nothing to check against, not a rung that works.
+    regions_note = ("yes" if render_ok else
+                    "NO -- rungs 5 to 7 reject everything, so their rows below "
+                    "measure nothing")
     print(f"rendered regions: {regions_note}\n")
     print(table(results, RUNG_NAMES, ERROR_CLASSES))
 

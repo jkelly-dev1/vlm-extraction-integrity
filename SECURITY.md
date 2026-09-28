@@ -47,12 +47,13 @@ script refuses to start if the estimate exceeds `--max-cost` (default $2.00).
 
 ## Reporting
 
-Issues are disabled on this repository, so neither of the two channels below is
-a public thread.
+Issues are disabled on this repository. A security report goes through the
+private channel below; a factual correction goes through a pull request, which
+is public.
 
 For a SECURITY concern, use GitHub's private vulnerability reporting: the
 "Report a vulnerability" button on the Security tab. It opens an advisory
-visible only to the maintainer, and it is the same channel every repository in
+visible only to the maintainer, the same channel every repository in
 this portfolio uses.
 
 For a FACTUAL correction, a wrong number, a mislabeled value, a rights argument

@@ -18,7 +18,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from vei.docs import corpus                                    # noqa: E402
-from vei.render import DEFAULT_DPI, render, visual_tokens      # noqa: E402
+from vei.render import DEFAULT_DPI, render, visual_tokens_for  # noqa: E402
 
 
 def main() -> int:
@@ -33,10 +33,14 @@ def main() -> int:
     args.out.mkdir(parents=True, exist_ok=True)
     truth = {}
     total_bytes = 0
+    # Measured on the pages actually written, which are cropped to their ink.
+    # visual_tokens() is the full uncropped sheet and overstates it about 4x.
+    tokens = []
     for doc in corpus(args.n, confusable=not args.control):
         png = render(doc, dpi=args.dpi)
         (args.out / f"{doc.doc_id}.png").write_bytes(png)
         total_bytes += len(png)
+        tokens.append(visual_tokens_for(png)[0])
         truth[doc.doc_id] = {
             "truth": doc.truth(),
             "regions": {k: list(v) for k, v in doc.regions.items()},
@@ -46,13 +50,13 @@ def main() -> int:
         "n": args.n,
         "dpi": args.dpi,
         "confusable": not args.control,
-        "visual_tokens_per_page": visual_tokens(args.dpi),
+        "visual_tokens_per_page_max": max(tokens),
         "documents": truth,
     }
     (args.out / "ground_truth.json").write_text(json.dumps(meta, indent=2) + "\n")
 
     print(f"wrote {args.n} pages to {args.out}  "
-          f"({total_bytes / 1024:.0f} KB, {visual_tokens(args.dpi):,} "
+          f"({total_bytes / 1024:.0f} KB, at most {max(tokens):,} "
           f"visual tokens/page at {args.dpi} DPI)")
     print(f"ground truth: {args.out / 'ground_truth.json'}")
     return 0

@@ -13,7 +13,7 @@ dependencies = []
 
 [project.optional-dependencies]
 # The offline half, corpus, error taxonomy, ladder, grader, is pure
-# standard library on purpose, so the measurement can be reproduced and
+# standard library, so the measurement can be reproduced and
 # audited without installing anything.
 render = ["pillow>=10"]
 real = ["anthropic>=0.40", "openai>=2.0"]

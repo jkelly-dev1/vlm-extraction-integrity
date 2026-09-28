@@ -11,8 +11,8 @@ a stronger test than a fresh run, because the payloads were generated before
 the rung existed and cannot have been influenced by it.
 
 Any rung added after a run can be evaluated this way. A rung that only looks
-good on data collected after someone designed it is not a rung, it is a
-hypothesis.
+good on data collected after someone designed it is a hypothesis, not yet a
+rung.
 """
 
 from __future__ import annotations
@@ -26,7 +26,31 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from vei.docs import corpus                                    # noqa: E402
+from vei.inject import CHANNELS                                # noqa: E402
 from vei.ladder import LADDER, RUNG_NAMES                      # noqa: E402
+from vei.render import DEFAULT_DPI                             # noqa: E402
+
+#: Rungs that grade against the page, so they need its geometry.
+PAGE_RUNGS = {name for name in RUNG_NAMES if name[0] in "567"}
+
+
+def page_unknown(r) -> str:
+    """Why this record's page cannot be rebuilt here, or "" when it can.
+
+    Rungs 5 to 7 compare citations with the regions of the page the model was
+    shown. This script rebuilds a clean page at the default resolution, or a
+    degraded one for a run keyed by level. A record with no stored evidence,
+    one rendered at another resolution, or one shown an injected page cannot
+    be graded against that, and grading it anyway reports a correct
+    extraction as a confident rejection.
+    """
+    if not r.get("evidence"):
+        return "no evidence recorded"
+    if r.get("dpi", DEFAULT_DPI) != DEFAULT_DPI:
+        return "rendered at another resolution"
+    if r.get("arm") in CHANNELS:
+        return "injected page"
+    return ""
 
 
 def main() -> int:
@@ -46,10 +70,10 @@ def main() -> int:
     #
     # Rungs 5 and 6 check citations against doc.regions. A Document straight
     # from corpus() has never been rendered, so its regions are empty, and rung
-    # 5 skips a field whose true region is unknown rather than failing it.
+    # 5 skips a field whose true region is unknown instead of failing it.
     # Grading that way silently WEAKENS rungs 5 and 6 instead of erroring: it
     # reports rung 5 catching 1 of 19 at the moderate level where the live run
-    # recorded 2. A re-grade that quietly disagrees with the run it is
+    # recorded 2. A re-grade that silently disagrees with the run it is
     # re-grading is worse than no re-grade at all.
     #
     # So each document is re-rendered and re-degraded with the same seed
@@ -96,21 +120,35 @@ def main() -> int:
         errs = [r for r in rs if not r["exact"]]
         oks = [r for r in rs if r["exact"]]
         print(f"-- {lv}: {len(errs)} errors, {len(oks)} correct")
+        skipped = {}
+        for r in rs:
+            why = page_unknown(r)
+            if why:
+                skipped[why] = skipped.get(why, 0) + 1
+        if skipped:
+            print("     rungs 5-7 NOT EXAMINED for "
+                  + ", ".join(f"{k} ({v})" for k, v in sorted(skipped.items()))
+                  + "; their counts below cover the rest only")
         row = {}
         for name, fn in LADDER:
+            if name in PAGE_RUNGS:
+                errs_n = [r for r in errs if not page_unknown(r)]
+                oks_n = [r for r in oks if not page_unknown(r)]
+            else:
+                errs_n, oks_n = errs, oks
             caught = 0
-            for r in errs:
+            for r in errs_n:
                 if not fn(r["payload"], doc_for(r), r.get("evidence")).accepted:
                     caught += 1
             false_rej = 0
-            for r in oks:
+            for r in oks_n:
                 if not fn(r["payload"], doc_for(r), r.get("evidence")).accepted:
                     false_rej += 1
-            row[name] = {"caught": caught, "of": len(errs),
-                         "false_rejections": false_rej, "of_correct": len(oks)}
-            pct = f"{caught / len(errs) * 100:3.0f}%" if errs else "  -"
-            print(f"     {name:<16} caught {caught:3d}/{len(errs):<3d} {pct}"
-                  f"   false rejections {false_rej}/{len(oks)}")
+            row[name] = {"caught": caught, "of": len(errs_n),
+                         "false_rejections": false_rej, "of_correct": len(oks_n)}
+            pct = f"{caught / len(errs_n) * 100:3.0f}%" if errs_n else "  -"
+            print(f"     {name:<16} caught {caught:3d}/{len(errs_n):<3d} {pct}"
+                  f"   false rejections {false_rej}/{len(oks_n)}")
         out[lv] = row
 
     if args.out:

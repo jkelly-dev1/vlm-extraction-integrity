@@ -182,7 +182,7 @@ def render(doc: Document, *, dpi: int = DEFAULT_DPI, family: str = "sans",
     # on the subtotal digits, which is precisely the value the injection needs
     # the model to copy, and the currency cell was destroyed. Both effects were
     # invisible in the artifacts, which recorded the verdict and not the page.
-    # Test_no_two_regions_overlap now fails if this comes back.
+    # test_no_two_regions_overlap now fails if this comes back.
     y = max(put_wrapped(doc.terms, margin, y2, body, "terms",
                         col2 - margin - int(12 * scale)),
             put(doc.currency, col2, y2, body, "currency"))
@@ -235,7 +235,7 @@ def render(doc: Document, *, dpi: int = DEFAULT_DPI, family: str = "sans",
     # Only the bottom and right are removed, so the origin does not move and
     # every region already recorded stays valid. Cropping the top would
     # silently invalidate the entire grounding ground truth, and that must
-    # not be quietly wrong.
+    # not be silently wrong.
     if crop:
         ink = img.convert("L").point(lambda v: 0 if v > 250 else 255)
         box = ink.getbbox()

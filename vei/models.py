@@ -144,7 +144,7 @@ class StubModel:
                   honest: bool) -> dict:
         """Citations a model would return alongside the payload.
 
-        `Row_count` is the number of table rows present on the page. In this
+        `row_count` is the number of table rows present on the page. In this
         harness it comes from the renderer's ground truth. In a production
         system it would come from an independent layout signal (a detector, or
         a separate cheap pass) NOT from the same extraction being graded,
@@ -297,23 +297,66 @@ class OpenAIModel:
         )
 
 
+def _brace_span_end(text: str, at: int) -> int:
+    """Index just past the brace span opening at `at`, or -1 if it never
+    closes. Braces inside JSON strings do not count."""
+    depth, in_str, esc = 0, False, False
+    for i in range(at, len(text)):
+        c = text[i]
+        if in_str:
+            if esc:
+                esc = False
+            elif c == "\\":
+                esc = True
+            elif c == '"':
+                in_str = False
+        elif c == '"':
+            in_str = True
+        elif c == "{":
+            depth += 1
+        elif c == "}":
+            depth -= 1
+            if depth == 0:
+                return i + 1
+    return -1
+
+
 def _split_payload(text: str) -> tuple[str, dict]:
     """Pull the JSON object out of a model reply.
 
-    Deliberately forgiving about surrounding prose, because rung 1 exists to
-    measure how often the reply is not clean JSON, if this helper stripped
-    fences and repaired braces, it would be doing rung 1's job and the rung
-    would measure nothing.
+    Each top-level "{" is tried in turn, and the first complete object is
+    decoded, so fences, prose and a second object around it are dropped. A
+    "{" inside a span that fails to decode is never tried. In a truncated
+    reply that "{" opens a line item, and decoding it would hand rung 1 a
+    fragment as the reply. When nothing decodes, rung 1 gets the text
+    between the first "{" and the last "}" unchanged and rejects it; on a
+    paid run it therefore measures whether the reply held a decodable
+    object, not whether the whole reply was clean JSON. The raw reply is not
+    kept.
     """
-    start = text.find("{")
-    end = text.rfind("}")
-    if start == -1 or end == -1 or end < start:
-        return text, {}
-    blob = text[start:end + 1]
-    try:
-        obj = json.loads(blob)
-    except json.JSONDecodeError:
-        return blob, {}
+    decoder = json.JSONDecoder()
+    at = text.find("{")
+    obj = None
+    while at != -1:
+        try:
+            candidate, _ = decoder.raw_decode(text, at)
+        except json.JSONDecodeError:
+            # Resume after this brace span, never inside it. A span that
+            # never closes is a truncated reply, and it holds no object.
+            end = _brace_span_end(text, at)
+            if end == -1:
+                break
+            at = text.find("{", end)
+            continue
+        if isinstance(candidate, dict):
+            obj = candidate
+            break
+        at = text.find("{", at + 1)
+    if obj is None:
+        start, end = text.find("{"), text.rfind("}")
+        if start == -1 or end == -1 or end < start:
+            return text, {}
+        return text[start:end + 1], {}
     evidence = {}
     if isinstance(obj, dict) and "citations" in obj:
         evidence["citations"] = obj.pop("citations")

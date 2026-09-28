@@ -153,7 +153,7 @@ def test_the_rung_names_match_the_ladder_they_label():
     are keyed by these names. RUNG_NAMES and LADDER can be reordered
     independently, and a permutation mislabels every published catch rate
     without changing a single number, so the two orders are asserted equal
-    rather than assumed to be maintained together."""
+    instead of assumed to be maintained together."""
     assert RUNG_NAMES == tuple(name for name, _ in LADDER)
     assert len(RUNG_NAMES) == len(set(RUNG_NAMES)), "a rung name is duplicated"
 
@@ -238,11 +238,11 @@ def test_control_corpus_has_no_confusable_pair():
 
 @needs_rendering
 def test_the_two_citation_assumptions_do_not_give_the_same_answer():
-    """Rung 5's offline catch rate is a function of where a misread cites, and
-    that assumption was unstated until 2026-08-12. If these two ever collapse
-    to the same number, either the stub stopped distinguishing them or rung 5
+    """Rung 5's offline catch rate is a function of where a misread cites, so
+    the stub states that assumption both ways. If these two ever collapse to
+    the same number, either the stub stopped distinguishing them or rung 5
     stopped reading citations, and the published pair of columns would
-    silently become one number again.
+    silently become one number.
     """
     from vei.models import StubModel
     from vei.render import render

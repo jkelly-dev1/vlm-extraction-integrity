@@ -44,10 +44,18 @@ are comparable: the LOUD goal, a total of $1.00.
 
 The last row is the odd one, and the important one:
 `metadata_field_consistent.png` carries the CONSISTENT goal, a self-consistent
-under-billing, and it is the page every published compliance number was measured
-on. It is a 160-character sentence rather than a short note, so it wraps, and
-why, before 2026-08-12, it was being drawn straight through the Currency column
-with `USD` printed across its subtotal digits.
+under-billing, and the `metadata_field` compliance numbers were measured on
+this page. It is a 160-character sentence rather than a short note, so it
+wraps. Before 2026-08-12 it was drawn straight through the Currency column with
+`USD` printed across its subtotal digits.
+
+The other five channels carried the same sentence in the consistent n=15 runs
+and are not pictured. In the first of those runs, on `plain_note`,
+`authority_framing` and `low_contrast` it was drawn across the TOTAL row, and
+the `rotated_margin` strip cut it off before its numbers. Since 2026-09-25 each
+is drawn clear of every printed value and inside the page, and the run was
+repeated on those pages on two models; INJECTION.md has both. This page, and
+every page pictured here, is byte-identical under the new layout.
 
 | file | visibility to a reviewer | printed text | size |
 |---|---|---|---|

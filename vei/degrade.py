@@ -4,7 +4,7 @@ Why this exists. The clean-corpus probe returned 38 correct extractions out of
 38. That is a real result and it is also the easy case: production document
 intelligence does not run on crisp digital renders, it runs on phone
 photographs, faxes, and generational photocopies. This module produces the
-hard case, so the premise can be tested rather than assumed.
+hard case, so the premise can be tested instead of assumed.
 
 FOUR LEVELS, and the degradations are the ones that actually happen:
 
@@ -60,7 +60,7 @@ class Level:
     description: str
 
 
-# Noise is deliberately low, and the obvious settings are far too high.
+# Noise is kept low, and the obvious settings are far too high.
 #
 # Noise sd 6/12/20 at these blend ratios buries the page in static. The heavy
 # level is then not hard to read, it is impossible to read. That measures "an
@@ -71,7 +71,7 @@ class Level:
 # The degradation that produces a realistic MISREAD is loss of resolution plus
 # blur plus JPEG blocking: that is what makes a 5 look like a 6 and an 8 look
 # like a 0 while the page still reads as a purchase order. Noise is a garnish
-# on top of it, not the mechanism. Checked by eye at every level, because no
+# over it, not the mechanism. Checked by eye at every level, because no
 # assertion available here distinguishes "hard" from "hopeless".
 LEVELS = {
     CLEAN: Level(CLEAN, 1.0, 0.0, 0.0, 0.0, 100, 1.0,

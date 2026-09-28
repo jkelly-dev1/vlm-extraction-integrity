@@ -42,15 +42,12 @@ from vei.render import (DEFAULT_DPI, RENDER_REVISION, render,  # noqa: E402
 # USD per million tokens, re-verified 2026-08-11 by reading
 # platform.claude.com/docs/en/about-claude/pricing directly.
 #
-# The claude-sonnet-5 entry was wrong here until 2026-08-11: it carried $3.00 /
-# $15.00, the price that had been SCHEDULED to take effect on 2026-09-01 when
-# the $2/$10 launch pricing expired. That increase was canceled and $2/$10
-# became the standard price, so this table was over-estimating Sonnet by 50%.
-# No published figure in this repository is affected, every paid run used
-# claude-opus-5, whose $5/$25 is confirmed unchanged, but the failure mode is
-# worth naming: a canceled price increase is the least visible way for a
-# hard-coded price to go stale. Nothing errors, nothing warns, and the number
-# simply stops being true.
+# claude-sonnet-5 is $2/$10. A $3/$15 increase was scheduled for 2026-09-01
+# and canceled, so any table carrying $3/$15 over-estimates Sonnet by 50%. The
+# claude-opus-5 runs are priced at $5/$25 and the three claude-sonnet-5 runs at
+# $2/$10. A canceled price increase is the least visible way for a hard-coded
+# price to go stale: nothing errors, nothing warns, and the number simply
+# stops being true.
 PRICING = {
     # Anthropic
     "claude-opus-5":   {"in": 5.00, "out": 25.00},
@@ -69,10 +66,15 @@ PRICING_VERIFIED = "2026-08-11"
 
 # Which adapter serves a model id. Kept next to PRICING so a model can never be
 # priced without also being routable, which is how a cross-provider run ends up
-# quietly billing the wrong provider's rates.
+# silently billing the wrong provider's rates.
 PROVIDER = {m: ("openai" if m.startswith(("gpt-", "o1", "o3", "o4"))
                 else "anthropic")
             for m in PRICING}
+
+#: The models the Claude-only scripts (this one, degrade_run.py and
+#: dpi_sweep.py) accept. They always build ClaudeModel, so offering an OpenAI
+#: id would price it at OpenAI rates and send it to the Anthropic API.
+ANTHROPIC_MODELS = sorted(m for m, p in PROVIDER.items() if p == "anthropic")
 
 # OPENAI long-context surcharge, recorded because it does not apply to this
 # workload and someone will eventually reuse this table where it does: prompts
@@ -88,12 +90,12 @@ PROVIDER = {m: ("openai" if m.startswith(("gpt-", "o1", "o3", "o4"))
 # so the estimate errs high rather than low.
 PROMPT_TOKENS = 420
 
-# Output tokens per call, by provider, and why this is not one number. It was
-# 900 for both until 2026-08-12, when a gpt-5.4 run of 80 calls was quoted at
-# $1.30 and billed $1.69: 1,270 output tokens per call against the 900
-# assumed. On the Responses API a reasoning model's thinking tokens are billed
-# as output and counted against max_output_tokens, so the same page costs more
-# output there than on the Anthropic side even when the JSON is identical.
+# Output tokens per call, by provider, and why this is not one number. A single
+# figure of 900 quotes a gpt-5.4 run of 80 calls at $1.30, and that run billed
+# $1.69: 1,270 output tokens per call against the 900 assumed. On the
+# Responses API a reasoning model's thinking tokens are billed as output and
+# counted against max_output_tokens, so the same page costs more output there
+# than on the Anthropic side even when the JSON is identical.
 # Measured per call at effort=medium: opus-5 812, sonnet-5 992, gpt-5.6-sol
 # 981, gpt-5.4 1,270. The figures below round above every one of those,
 # because an estimate that errs LOW is the one that spends money nobody
@@ -155,7 +157,8 @@ def main() -> int:
     ap.add_argument("--probe", action="store_true",
                     help="small calibration run (default 40 documents)")
     ap.add_argument("--n", type=int, default=None)
-    ap.add_argument("--model", default="claude-opus-5", choices=sorted(PRICING))
+    ap.add_argument("--model", default="claude-opus-5", choices=ANTHROPIC_MODELS,
+                    help="this script calls the Anthropic API only")
     ap.add_argument("--dpi", type=int, default=DEFAULT_DPI)
     ap.add_argument("--effort", default="medium")
     ap.add_argument("--max-cost", type=float, default=2.00,
@@ -163,11 +166,20 @@ def main() -> int:
     ap.add_argument("--confirm", action="store_true",
                     help="actually spend money; without it this is a dry run")
     ap.add_argument("--out", type=Path, default=Path("audit/real_run.json"))
+    ap.add_argument("--overwrite", action="store_true",
+                    help="replace an existing --out file; without it a paid run "
+                         "refuses before it spends anything")
     args = ap.parse_args()
+    # The default --out is an artifact this repository ships. A paid run that
+    # wrote over it would replace published evidence with a new sample.
+    if args.confirm and args.out.exists() and not args.overwrite:
+        print(f"REFUSING TO START: {args.out} exists. Pass another --out, or "
+              f"--overwrite to replace it.")
+        return 2
 
     n = args.n if args.n is not None else (40 if args.probe else 120)
 
-    # Render one page for real and measure it, rather than assuming a size.
+    # Render one page for real and measure it, instead of assuming a size.
     # This costs nothing and is the difference between an estimate and a guess.
     sample = next(iter(corpus(1)))
     vis, vw, vh = visual_tokens_for(render(sample, dpi=args.dpi))
@@ -255,7 +267,7 @@ def main() -> int:
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps({
-        "adapter": "claude",
+        "adapter": model.adapter,
         "model": args.model,
         "effort": args.effort,
         "dpi": args.dpi,

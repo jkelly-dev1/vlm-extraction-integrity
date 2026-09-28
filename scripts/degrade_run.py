@@ -34,8 +34,9 @@ from vei.grade import wilson                                   # noqa: E402
 from vei.ladder import LADDER                                 # noqa: E402
 from vei.models import ClaudeModel                             # noqa: E402
 from vei.render import DEFAULT_DPI, render, visual_tokens_for  # noqa: E402
-from scripts.real_run import (PRICING, PRICING_VERIFIED, PROMPT,  # noqa: E402
-                              PROMPT_TOKENS, OUTPUT_TOKENS, classify)
+from scripts.real_run import (ANTHROPIC_MODELS, PRICING,       # noqa: E402
+                              PRICING_VERIFIED, PROMPT, PROMPT_TOKENS,
+                              OUTPUT_TOKENS, classify)
 
 
 def family_of(payload: str, doc, wrong: list[str]) -> str:
@@ -64,15 +65,25 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--n", type=int, default=25,
                     help="documents per level (default 25)")
-    ap.add_argument("--model", default="claude-opus-5", choices=sorted(PRICING))
+    ap.add_argument("--model", default="claude-opus-5", choices=ANTHROPIC_MODELS,
+                    help="this script calls the Anthropic API only")
     ap.add_argument("--dpi", type=int, default=DEFAULT_DPI)
     ap.add_argument("--effort", default="medium")
     ap.add_argument("--max-cost", type=float, default=3.50)
     ap.add_argument("--confirm", action="store_true")
     ap.add_argument("--out", type=Path, default=Path("audit/degrade_run.json"))
+    ap.add_argument("--overwrite", action="store_true",
+                    help="replace an existing --out file; without it a paid run "
+                         "refuses before it spends anything")
     args = ap.parse_args()
+    # The default --out is an artifact this repository ships. A paid run that
+    # wrote over it would replace published evidence with a new sample.
+    if args.confirm and args.out.exists() and not args.overwrite:
+        print(f"REFUSING TO START: {args.out} exists. Pass another --out, or "
+              f"--overwrite to replace it.")
+        return 2
 
-    # Measure real pages at each level rather than assuming a size.
+    # Measure real pages at each level instead of assuming a size.
     docs = list(corpus(args.n))
     base = {d.doc_id: render(d, dpi=args.dpi) for d in docs}
     per_level_tokens = {}
@@ -203,7 +214,7 @@ def main() -> int:
 
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(json.dumps({
-        "adapter": "claude", "model": args.model, "effort": args.effort,
+        "adapter": model.adapter, "model": args.model, "effort": args.effort,
         "design": "paired: same documents at every level",
         "n_per_level": args.n, "levels": list(LEVEL_NAMES),
         "level_specs": {lv: {"effective_dpi": effective_dpi(lv),

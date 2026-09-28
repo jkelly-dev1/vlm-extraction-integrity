@@ -94,7 +94,7 @@ def test_a_deliberately_wrong_transform_fails_the_ink_test():
     def usable(boxes) -> float:
         """Fraction of boxes that are on the canvas AND sitting on ink.
 
-        Falling off the canvas counts as a failure rather than being skipped.
+        Falling off the canvas counts as a failure instead of being skipped.
         Skipping them discards most of the sample at the heavy level and
         leaves the check passing on four boxes that happen to land in the
         dense top-left corner.
@@ -120,7 +120,7 @@ def test_a_deliberately_wrong_transform_fails_the_ink_test():
 
 def test_clean_level_is_a_true_no_op():
     """The control arm must be the render itself, byte for byte. If 'clean'
-    quietly re-encoded the image, every level would be degraded and the
+    silently re-encoded the image, every level would be degraded and the
     baseline would not be a baseline."""
     doc, png = _rendered(4)
     out, regions = degrade(png, CLEAN, seed=0, regions=doc.regions)
@@ -152,7 +152,7 @@ def test_levels_are_monotonically_worse():
 
 
 def test_heavy_falls_below_the_legibility_floor():
-    """The heavy level is meant to be genuinely hard, not merely annotated as
+    """The heavy level is meant to be genuinely hard, not only annotated as
     hard. 150 DPI text at 0.52 is 78 DPI, below the ~110 DPI floor named in
     render.py."""
     assert effective_dpi(HEAVY) < 110
@@ -179,7 +179,7 @@ def test_different_seeds_give_different_skew():
 
 @pytest.mark.parametrize("level", LEVEL_NAMES)
 def test_degraded_pages_do_not_get_more_expensive(level):
-    """Degradation must not quietly raise the bill. Downsampled levels should
+    """Degradation must not silently raise the bill. Downsampled levels should
     cost fewer visual tokens; skew expands the canvas slightly, so the light
     level is allowed a small increase but not a large one."""
     from vei.render import visual_tokens_for
@@ -192,3 +192,40 @@ def test_degraded_pages_do_not_get_more_expensive(level):
         f"{level} costs {tokens} tokens vs {clean_tokens} clean")
     if LEVELS[level].scale < 1.0:
         assert tokens < clean_tokens
+
+
+def test_rotation_alone_moves_the_regions_with_the_ink():
+    """The rotation half of the transform, isolated.
+
+    The heavy-level check above also rescales, and a missing rescale is
+    enough to fail it, so it cannot show that the rotation step moves the
+    regions. A pure rotation, no rescale and no noise, separates the two: the
+    moved boxes must all sit on ink, and the unmoved ones must mostly not.
+    """
+    import random
+
+    from vei.degrade import Level, _apply
+
+    doc, png = _rendered(0)
+    spec = Level("rotate_only", 1.0, 6.0, 0.0, 0.0, 100, 1.0, "rotation only")
+    out, moved = _apply(png, spec, random.Random("rotate-only"),
+                        dict(doc.regions))
+    gray = _img(out).convert("L")
+    paper = gray.getextrema()[1]
+    w, h = gray.size
+
+    def on_ink(boxes) -> float:
+        hits = 0
+        for x0, y0, x1, y1 in boxes:
+            if (0 <= x0 < x1 <= w and 0 <= y0 < y1 <= h
+                    and gray.crop((x0, y0, x1, y1)).getextrema()[0] < paper - 20):
+                hits += 1
+        return hits / len(boxes)
+
+    assert on_ink(moved.values()) == 1.0
+    # Measured 0.78 at this angle: text lines are long, so an unrotated box
+    # often still lands on some ink. What matters is that it is not all of
+    # them, which is what the first assertion requires of the moved boxes.
+    assert on_ink(doc.regions.values()) < 0.9, (
+        "unrotated boxes all land on ink, so this check cannot see a "
+        "rotation that left the regions behind")

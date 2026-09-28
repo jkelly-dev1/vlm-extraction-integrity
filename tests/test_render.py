@@ -102,7 +102,7 @@ def test_wrapping_never_loses_text():
     lines = _wrap(text, lambda s: len(s) * 10, 100)
     assert " ".join(lines).split() == text.split()
     assert all(lines)
-    # One word wider than the limit gets its own line rather than vanishing.
+    # One word wider than the limit gets its own line instead of vanishing.
     assert _wrap("supercalifragilistic", lambda s: len(s) * 10, 50) == \
         ["supercalifragilistic"]
 
@@ -156,3 +156,67 @@ def test_confusable_rows_are_visibly_near_identical():
 def test_render_is_deterministic():
     """Same document, same bytes. Otherwise corpus runs are not comparable."""
     assert render(make_document(7)) == render(make_document(7))
+
+
+@pytest.mark.parametrize("kind", ["loud", "consistent"])
+def test_every_drawn_injection_is_a_region_inside_the_page(kind):
+    """The injected text is drawn after the page's regions are recorded, so it
+    was invisible to the overlap test above: the consistent ask crossed the
+    TOTAL row on three channels, and the rotated strip cut it off before its
+    numbers. Each drawn injection now records its box, which must lie inside
+    the image; test_no_two_regions_overlap then checks it against every value.
+    """
+    import io
+
+    from PIL import Image
+
+    from vei.inject import CHANNELS, INJECTED_REGION, METADATA, render_with_injection
+
+    for doc in corpus(5):
+        for channel in CHANNELS:
+            if channel == METADATA:
+                continue          # it replaces a field; its region is `terms`
+            doc.regions.clear()
+            png, _ = render_with_injection(doc, channel, kind=kind)
+            w, h = Image.open(io.BytesIO(png)).size
+            x0, y0, x1, y1 = doc.regions[INJECTED_REGION]
+            assert 0 <= x0 < x1 <= w and 0 <= y0 < y1 <= h, (
+                f"{doc.doc_id} {channel} ({kind}): injected text at "
+                f"{(x0, y0, x1, y1)} runs off a {w}x{h} page")
+
+
+@pytest.mark.parametrize("kind", ["loud", "consistent"])
+def test_a_page_does_not_depend_on_the_channels_drawn_before_it(kind):
+    """inject_run.py draws every channel in turn on the same Document objects.
+    The region left by one channel's injection must not move the next one's,
+    so each page, and each injected box, equals the one drawn on a fresh
+    document."""
+    from vei.inject import CHANNELS, INJECTED_REGION, render_with_injection
+
+    reused = list(corpus(5))
+    for channel in CHANNELS:
+        for i, doc in enumerate(reused):
+            png, _ = render_with_injection(doc, channel, kind=kind)
+            fresh = list(corpus(5))[i]
+            want, _ = render_with_injection(fresh, channel, kind=kind)
+            assert doc.regions.get(INJECTED_REGION) == \
+                fresh.regions.get(INJECTED_REGION), (
+                f"{doc.doc_id} {channel} ({kind}): injected box "
+                f"{doc.regions.get(INJECTED_REGION)} after earlier channels, "
+                f"{fresh.regions.get(INJECTED_REGION)} on a fresh document")
+            assert png == want, f"{doc.doc_id} {channel} ({kind}): page differs"
+
+
+def test_injection_lines_lose_no_word_and_fit_their_width():
+    from PIL import ImageFont
+
+    from vei.fonts import font_path
+    from vei.inject import CONSISTENT, CHANNELS, injection_lines, make_injection
+
+    font = ImageFont.truetype(font_path("sans"), 8)
+    for channel in CHANNELS:
+        text = make_injection(make_document(0), channel, CONSISTENT).text
+        lines = injection_lines(text, font, 270)
+        assert " ".join(lines).split() == text.split()
+        assert all(font.getlength(line) <= 270 for line in lines
+                   if " " in line), lines

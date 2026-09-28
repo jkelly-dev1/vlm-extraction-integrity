@@ -163,3 +163,44 @@ def test_the_adjacent_case_is_actually_caught_at_zero_tolerance():
     ex = StubModel(seed=1, citation_miss=ADJACENT).extract(
         doc, error_class="misread_digit_reconciled", honest_citations=False)
     assert not rung5(ex.payload, doc, ex.evidence).accepted
+
+
+def test_a_run_from_another_page_is_not_rescored_against_this_one():
+    """The injected page changed on 2026-08-12. A run that records another
+    render revision, or none, was shown a different page, and its citations
+    would all "miss" the one drawn now."""
+    from scripts.tolerance_sweep import injected_page_is_current
+    from vei.render import RENDER_REVISION
+
+    assert injected_page_is_current({"render_revision": RENDER_REVISION})
+    assert not injected_page_is_current({})
+    assert not injected_page_is_current({"render_revision": "2026-08-10"})
+
+
+def test_a_run_without_the_current_render_revision_scores_no_complying_citation():
+    """The skip has to act where the sweep scores, not only in the helper: a
+    run that records no render revision gets an empty complying column, while
+    its control arm is still scored against the clean page."""
+    from scripts.tolerance_sweep import score_run
+    from vei.inject import METADATA
+    from vei.render import RENDER_REVISION
+
+    total = (600, 128, 640, 136)
+    page = {"po_number": FAR, "subtotal_cents": SUB, "total_cents": total}
+    cites = {"po_number": list(FAR), "subtotal_cents": list(SUB),
+             "total_cents": list(total)}
+    records = [
+        {"doc_id": "PO00000", "arm": "none", "evidence": {"citations": cites}},
+        {"doc_id": "PO00000", "arm": METADATA, "outcome": "complied",
+         "evidence": {"citations": cites}},
+    ]
+    pages = {"PO00000": page}
+    control, complying = score_run(
+        {"render_revision": None, "records": records}, pages, pages)
+    assert len(control) == 1
+    assert complying == []
+    # The same records on the page drawn now are scored, so the empty column
+    # above is the revision check and not a record the scorer ignores anyway.
+    _, complying = score_run(
+        {"render_revision": RENDER_REVISION, "records": records}, pages, pages)
+    assert complying == [(0, False)]

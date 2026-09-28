@@ -2,9 +2,9 @@
 
 The renderer needs real TrueType fonts: PIL's built-in bitmap font is a single
 fixed size, and this project's whole point is measuring what happens at a given
-pixel size. We look in the usual system locations rather than vendoring a font
+pixel size. We look in the usual system locations instead of vendoring a font
 file, and we fail loudly with the search path if nothing is found. A silent
-fallback to the bitmap font would quietly invalidate every measurement.
+fallback to the bitmap font would silently invalidate every measurement.
 """
 
 from __future__ import annotations
@@ -37,7 +37,7 @@ class FontNotFound(RuntimeError):
 def font_path(family: str = "sans", bold: bool = False) -> str:
     """Absolute path to a TrueType font file.
 
-    Raises FontNotFound with the full search path rather than falling back to
+    Raises FontNotFound with the full search path instead of falling back to
     a bitmap font, because a silent fallback would change every glyph metric
     the measurement depends on.
     """
